@@ -1,6 +1,7 @@
 import 'package:barber_pannel/cavlog/app/presentation/screens/navigation/bottom_navigation_controllers.dart';
 import 'package:barber_pannel/cavlog/app/presentation/screens/pages/home/notification_screen/notification_screen.dart';
 import 'package:barber_pannel/cavlog/app/presentation/screens/pages/home/wallet_screen/wallet_screen.dart';
+import 'package:barber_pannel/cavlog/app/presentation/screens/settings/bookings_screen/bookings_screen.dart';
 import 'package:barber_pannel/cavlog/app/presentation/screens/settings/edit_details_screen/profile_edit_details.dart';
 import 'package:barber_pannel/cavlog/app/presentation/screens/settings/service_management_screen/service_add_screen.dart';
 import 'package:barber_pannel/cavlog/app/presentation/screens/settings/service_management_screen/service_manage_screen.dart';
@@ -34,6 +35,7 @@ class AppRoutes {
   static const String timeManagementScreen = '/time_management_screen';
   static const String walletScreen = '/wallet_screen';
   static const String notificationScreen = '/notification_screen';
+  static const String bookingScreen = '/booking_screen';
 
 
   static Route<dynamic> generateRoute(RouteSettings settings){
@@ -66,6 +68,8 @@ class AppRoutes {
         return CupertinoPageRoute(builder: (_) =>const ServiceManageScreen());
       case timeManagementScreen: 
         return CupertinoPageRoute(builder: (_) =>const TimeManagementScreen());
+      case bookingScreen:
+        return CupertinoPageRoute(builder: (_) => const BookingsScreen());
       case walletScreen:
         return MaterialPageRoute(builder: (_) =>const WalletScreen());
       case notificationScreen:

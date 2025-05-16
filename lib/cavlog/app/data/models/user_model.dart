@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   final String uid;
-  final String userName;
-  final String phoneNumber;
-  final String address;
+  final String? userName;
+  final String? phoneNumber;
+  final String? address;
   final String email;
-  final String image;
-  final int age;
+  final String? image;
+  final int? age;
   final DateTime createdAt;
   final bool google;
 

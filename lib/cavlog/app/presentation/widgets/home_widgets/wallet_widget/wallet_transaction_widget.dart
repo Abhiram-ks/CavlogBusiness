@@ -58,9 +58,7 @@ class WalletTransctionWidget extends StatelessWidget {
           ),
         ),
         ConstantWidgets.hight20(context),
-        Expanded(
-            child: walletTransactionWidgetBuilder(
-                context, screenHeight, screenWidth))
+        Expanded( child: walletTransactionWidgetBuilder(context, screenHeight, screenWidth))
       ],
     );
   }

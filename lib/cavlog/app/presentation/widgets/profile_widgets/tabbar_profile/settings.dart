@@ -47,6 +47,8 @@ class TabbarSettings extends StatelessWidget {
                 onTap: () { Navigator.pushNamed(context, AppRoutes.serviceManageScreen);}),
             settingsWidget(context: context,screenHeight: screenHeight,icon: CupertinoIcons.clock,title: 'Time Management',
                 onTap: () { Navigator.pushNamed(context, AppRoutes.timeManagementScreen);}),
+            settingsWidget(context: context,screenHeight: screenHeight,icon: CupertinoIcons.calendar_circle,title: 'Booking Management',
+                onTap: () { Navigator.pushNamed(context, AppRoutes.bookingScreen);}),
             Divider(color: AppPalette.hintClr),ConstantWidgets.hight10(context),
             Text('Community support',
                 style: TextStyle(

@@ -44,8 +44,7 @@ class _WalletScreenWidgetState extends State<WalletScreenWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('My Wallet',
-                  style: GoogleFonts.plusJakartaSans(
-                      fontSize: 28, fontWeight: FontWeight.bold)),
+                  style: GoogleFonts.plusJakartaSans( fontSize: 28, fontWeight: FontWeight.bold)),
               ConstantWidgets.hight10(context),
               Text(
                 'Manage your wallet effortlessly — check history, monitor payments, and top up in seconds.',

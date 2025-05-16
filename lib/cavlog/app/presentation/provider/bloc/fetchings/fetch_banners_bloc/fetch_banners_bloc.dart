@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../data/models/banner_model.dart';
-import '../../../../data/repositories/fetch_banner_repo.dart';
+import '../../../../../data/models/banner_model.dart';
+import '../../../../../data/repositories/fetch_banner_repo.dart';
 
 part 'fetch_banners_event.dart';
 part 'fetch_banners_state.dart';

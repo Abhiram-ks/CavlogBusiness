@@ -7,6 +7,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../../../core/themes/colors.dart';
 import '../../../../../../core/utils/constant/constant.dart';
 import '../../../provider/bloc/fetchings/fetch_booking_with_user_bloc/fetch_booking_with_user_bloc.dart';
+import '../../../screens/settings/bookings_screen/booking_details_screen.dart';
 
 RefreshIndicator notificationWidgetBuilder(
     BuildContext context, double screenHeight, double screenWidth) {
@@ -72,11 +73,13 @@ RefreshIndicator notificationWidgetBuilder(
                     separatorBuilder: (_, __) => ConstantWidgets.hight10(context),
                     itemBuilder: (context, index) {
                       final booking = state.combo[index];
-                      final isUser =   booking.user.userName.isNotEmpty;
-                      final isAddress = booking.user.address.isNotEmpty;
+                      final isUser =   booking.user.userName!.isNotEmpty && booking.user.userName != 'null';
+                      final isAddress = booking.user.address!.isNotEmpty && booking.user.address != 'null';
 
                       return TrasactionCardsWalletWidget(
-                        ontap: () {},
+                        ontap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => BookingDetailsScreen(barberId: booking.booking.barberId, userId: booking.booking.userId, docId: booking.booking.bookingId ?? '')));
+                        },
                         screenHeight: screenHeight,
                         amount: isUser   ? booking.booking.otp
                             : booking.booking.otp,

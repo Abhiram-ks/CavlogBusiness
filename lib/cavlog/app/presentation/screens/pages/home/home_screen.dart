@@ -10,9 +10,9 @@ import '../../../../../../core/utils/constant/constant.dart';
 import '../../../../../../core/utils/image/app_images.dart';
 import '../../../../data/repositories/fetch_banner_repo.dart';
 import '../../../../data/repositories/fetch_booking_transaction_repo.dart';
-import '../../../provider/bloc/fetch_banners_bloc/fetch_banners_bloc.dart';
+import '../../../provider/bloc/fetchings/fetch_banners_bloc/fetch_banners_bloc.dart';
 import '../../../provider/bloc/fetchings/fetch_booking_bloc/fetch_booking_bloc.dart';
-import '../../../provider/cubit/cubit/image_slider_cubit.dart';
+import '../../../provider/cubit/image_slider_cubit/image_slider_cubit.dart';
 import '../../../widgets/home_widgets/home_screen_widget/home_sliver_appbar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -113,7 +113,7 @@ class HomeScreenBodyWIdget extends StatelessWidget {
                   baseColor: Colors.grey[300] ?? AppPalette.greyClr,
                   highlightColor: AppPalette.whiteClr,
                   child: ImageScolingWidget(
-                      imageList: [AppImages.loginImageAbove, AppImages.loginImageAbove],
+                      imageList: [AppImages.emptyImage, AppImages.emptyImage],
                       show: true,
                       screenHeight: screenHeight,
                       screenWidth: screenWidth),

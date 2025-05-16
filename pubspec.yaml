@@ -96,10 +96,11 @@ flutter:
     - assets/images/loginbgbelow.png
     - assets/images/loginbgAbove.png
     - assets/images/googlelogoimage.png
+    - assets/images/barberemptyimage.webp
+    - assets/images/applogpng.png
     - assets/lotties/adminRequstW8.json
     - assets/lotties/emptylistlottie.json
     - assets/lotties/pagenotfound.json
-    - assets/images/applogpng.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

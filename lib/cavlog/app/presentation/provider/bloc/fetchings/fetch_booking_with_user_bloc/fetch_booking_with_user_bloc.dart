@@ -27,7 +27,7 @@ class FetchBookingWithBarberBloc extends Bloc<FetchBookingWithUserEvent, FetchBo
         emit(FetchBookingWithUserFailure('Shop ID not found. Please log in again.'));
         return;
       }
-
+      
       await emit.forEach<List<BookingWithUserModel>>(
         _repository.streamBookingsWithUser(barberID: barberUid), 
         onData: (booking) {

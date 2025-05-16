@@ -1,5 +1,6 @@
 
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetch_booking_bloc/fetch_booking_bloc.dart';
+import 'package:barber_pannel/cavlog/app/presentation/screens/settings/bookings_screen/booking_details_screen.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/home_widgets/wallet_widget/wallet_tranasction_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,7 +84,9 @@ RefreshIndicator walletTransactionWidgetBuilder(
                           .contains('online banking');
                       final originalAmount = booking.amountPaid.toDouble();
                       return TrasactionCardsWalletWidget(
-                        ontap: () {},
+                        ontap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => BookingDetailsScreen(barberId: booking.barberId, userId: booking.userId, docId: booking.bookingId ?? '')));
+                        },
                         screenHeight: screenHeight,
                         amount: iscredited
                             ? '+ ₹$originalAmount'
