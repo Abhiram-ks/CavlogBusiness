@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:barber_pannel/cavlog/app/presentation/screens/settings/user_profile_screen/user_profile_screen.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/settings_widget/setting_booking_detail_widget/detail_customs_cards_widget.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/settings_widget/setting_booking_detail_widget/detail_top_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +71,9 @@ class TopPortionWidget extends StatelessWidget {
 
                     alignment: Alignment.center,
                           child: InkWell(
-                            onTap: (){},
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfileScreen(userId: user.uid)));
+                            },
                             child: paymentSectionBarberData(
                                 context: context,
                                 imageURl: user.image ?? AppImages.emptyImage,

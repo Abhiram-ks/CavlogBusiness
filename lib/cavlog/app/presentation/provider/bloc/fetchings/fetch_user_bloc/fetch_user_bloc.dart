@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:barber_pannel/cavlog/app/data/repositories/fetch_users_repo.dart';
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../../../../data/models/user_model.dart';

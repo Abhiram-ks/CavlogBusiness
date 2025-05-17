@@ -3,30 +3,31 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/themes/colors.dart';
 import '../../../../../../core/utils/constant/constant.dart';
 
-SizedBox profileviewWidget(double screenWidth, BuildContext context,
-    IconData icons, String heading, Color iconclr,
-    {Color? textColor, int? maxline, double? widget}) {
-  return SizedBox(
-    width: widget ?? screenWidth * 0.55,
-    child: Row(children: [
-      Icon(
-        icons,
-        color: iconclr,
-      ),
-      ConstantWidgets.width20(context),
-      Expanded(
-        child: Text(
-          heading,
-          style: TextStyle(
-            color: textColor ?? AppPalette.whiteClr,
-          ),
-          maxLines: maxline ?? 1,
-          overflow: TextOverflow.ellipsis,
+
+
+ SizedBox profileviewWidget(double screenWidth, BuildContext context,
+      IconData icons, String heading, Color iconclr, {Color? textColor, int? maxLines}) {
+    return SizedBox(
+      width: screenWidth * 0.55,
+      child: Row(children: [
+        Icon(
+          icons,
+          color: iconclr,
         ),
-      ),
-    ]),
-  );
-}
+        ConstantWidgets.width20(context),
+        Expanded(
+          child: Text(
+            heading,
+            style: TextStyle(
+              color: textColor ?? AppPalette.whiteClr,
+            ),
+            maxLines: maxLines ?? 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ]),
+    );
+  }
 
 IconButton iconsFilledDetail(
     {required BuildContext context,
@@ -49,3 +50,30 @@ IconButton iconsFilledDetail(
     ),
   );
 }
+
+
+
+
+  Column detailsPageActions(
+      {required BuildContext context,
+      required double screenWidth,
+      required IconData icon,
+      required VoidCallback onTap,
+      Color ? colors,
+      required String text}) {
+    return Column(
+      children: [
+        iconsFilledDetail(
+          icon: icon,
+          forgroudClr:colors ?? Color(0xFFFEBA43),
+          context: context,
+          borderRadius: 15,
+          padding: screenWidth * .05,
+          fillColor: Color.fromARGB(255, 248, 239, 216),
+          onTap: onTap,
+        ),
+        Text(text)
+      ],
+    );
+  }
+

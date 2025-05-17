@@ -29,27 +29,3 @@ class TabBarDelegate extends SliverPersistentHeaderDelegate {
   }
 }
 
-
- SizedBox profileviewWidget(double screenWidth, BuildContext context,
-      IconData icons, String heading, Color iconclr, {Color? textColor, int? maxLines}) {
-    return SizedBox(
-      width: screenWidth * 0.55,
-      child: Row(children: [
-        Icon(
-          icons,
-          color: iconclr,
-        ),
-        ConstantWidgets.width20(context),
-        Expanded(
-          child: Text(
-            heading,
-            style: TextStyle(
-              color: textColor ?? AppPalette.whiteClr,
-            ),
-            maxLines: maxLines ?? 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ]),
-    );
-  }

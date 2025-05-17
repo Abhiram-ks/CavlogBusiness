@@ -5,6 +5,7 @@ import 'package:barber_pannel/cavlog/app/presentation/widgets/profile_widgets/ta
 import 'package:barber_pannel/cavlog/app/presentation/widgets/profile_widgets/tabbar_profile/tabbar_post/post_upload.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/profile_widgets/tabbar_profile/settings.dart';
 import 'package:barber_pannel/cavlog/app/data/models/barber_model.dart';
+import 'package:barber_pannel/cavlog/app/presentation/widgets/settings_widget/setting_booking_detail_widget/detail_customs_cards_widget.dart';
 import 'package:barber_pannel/core/cloudinary/cloudinary_service.dart';
 import 'package:barber_pannel/core/routes/routes.dart';
 import 'package:flutter/material.dart';

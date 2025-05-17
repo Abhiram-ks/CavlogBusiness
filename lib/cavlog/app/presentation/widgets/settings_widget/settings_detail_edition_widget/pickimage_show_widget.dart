@@ -1,6 +1,5 @@
 
 import 'dart:io';
-import 'package:barber_pannel/cavlog/app/presentation/widgets/profile_widgets/profile_helper_widget/profile_tabbar_widget.dart';
 import 'package:barber_pannel/core/common/common_imageshow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +11,7 @@ import '../../../../../../core/utils/image/app_images.dart';
 import '../../../../../../core/utils/constant/constant.dart';
 import '../../../../data/models/barber_model.dart';
 import '../../../provider/bloc/image_picker/image_picker_bloc.dart';
+import '../setting_booking_detail_widget/detail_customs_cards_widget.dart';
 
 class ProfileEditDetailsWidget extends StatelessWidget {
   final double screenHeight;
