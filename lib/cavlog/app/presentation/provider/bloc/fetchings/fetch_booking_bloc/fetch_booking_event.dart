@@ -16,3 +16,4 @@ class FetchBookingDatasFilteringStatus extends FetchBookingEvent {
 
   FetchBookingDatasFilteringStatus({required this.status});
 }
+

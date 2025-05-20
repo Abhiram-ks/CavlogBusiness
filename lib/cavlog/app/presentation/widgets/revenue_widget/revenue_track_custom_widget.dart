@@ -1,3 +1,4 @@
+import 'package:barber_pannel/core/routes/routes.dart';
 import 'package:barber_pannel/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class RevanueContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-
+        Navigator.pushNamed(context, AppRoutes.revenueScreen);
       },
       child: Container(
         width: double.infinity,
@@ -75,7 +76,7 @@ class RevanueContainer extends StatelessWidget {
                 child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.4),
+                      color: Colors.white.withAlpha(102),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     alignment: Alignment.center,

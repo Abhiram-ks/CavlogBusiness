@@ -124,4 +124,6 @@ class FetchBookingBloc extends Bloc<FetchBookingEvent, FetchBookingState> {
       emit(FetchBookingFailure('An unexpected error occurred: ${e.toString()}'));
     }
   }
+
+ 
 }

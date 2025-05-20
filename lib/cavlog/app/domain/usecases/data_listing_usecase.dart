@@ -23,3 +23,13 @@ const double exchangeRateINRtoUSD = 0.0118;
 double convertINRtoUSD(double amountInINR) {
   return amountInINR * exchangeRateINRtoUSD;
 }
+
+
+String formatIndianCurrency(double amount) {
+  final formatCurrency = NumberFormat.currency(
+    locale: 'en_IN',
+    symbol: '₹ ',
+    decimalDigits: 2,
+  );
+  return formatCurrency.format(amount);
+}

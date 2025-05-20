@@ -37,7 +37,7 @@ class ServiceScreen extends StatelessWidget {
           double screenHeight = constraints.maxHeight;
           double screenWidth = constraints.maxWidth;
           return ColoredBox(
-            color: AppPalette.scafoldClr ?? AppPalette.whiteClr,
+            color: AppPalette.hintClr,
             child: SafeArea(
               child: Scaffold(
                   body: BlocBuilder<ServicePageCubit, CurrentServicePage>(
