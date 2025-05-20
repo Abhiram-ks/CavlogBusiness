@@ -16,3 +16,16 @@ class AppPalette  {
   static const lightOrengeclr = Color(0x00ffdda1); //light orenge for the chat 
   static const trasprentClr   = Colors.transparent;
 }
+
+
+
+//Pie chart color variation
+class GlobalColors {
+  static const List<Color> segmentColors = [
+    Color(0xFF000000),
+    Color(0xFF444444), 
+    Color(0xFF888888), 
+    Color(0xFFCCCCCC), 
+    Color.fromARGB(255, 225, 225, 225), 
+  ];
+}

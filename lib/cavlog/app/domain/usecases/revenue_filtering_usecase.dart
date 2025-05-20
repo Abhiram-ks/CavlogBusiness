@@ -12,7 +12,8 @@ class RevenueFilteringUsecase {
 
     return todayBookings;
   }
-
+  
+  //It is the algorthem or helper of the top services finding
   Map<String, double> aggregateServiceRevenue(List<BookingModel> bookings) {
     final Map<String, double> serviceRevenue = {};
 
@@ -26,7 +27,9 @@ class RevenueFilteringUsecase {
 
     return serviceRevenue;
   }
-
+ 
+ ///Fetching the top 5 services in the services list 5th one is the (others) all balanced services calculated and emit the 
+ ///last one (others)
   Map<String, dynamic> extractTopServices(List<BookingModel> bookings,
       {int maxCount = 5}) {
     final revenueMap = aggregateServiceRevenue(bookings);
@@ -74,7 +77,9 @@ class RevenueFilteringUsecase {
 
     return totalEarnings;
   }
+  
 
+  //!calculating earnings algorithem it working on the bookings model depend
   double calculateTodayEarnings(List<BookingModel> bookings) {
     final todayDateStr = DateFormat('dd-MM-yyyy').format(DateTime.now());
 
@@ -136,6 +141,9 @@ class RevenueFilteringUsecase {
   }
 }
 
+
+///Importent module for the line chart algorithems
+///Depent on the date range it week be generating so and return the corresponding filters
 class RevenueGraphGenerator {
   static Map<String, dynamic> generateGraphData({
     required List<BookingModel> bookings,
@@ -160,12 +168,11 @@ class RevenueGraphGenerator {
 
     switch (filter) {
       case RevenueFilter.today:
-        // Hourly breakdown for today
         for (int hour = 0; hour < 24; hour += 3) {
           final startHour = hour;
           final endHour = hour + 2 >= 24 ? 23 : hour + 2;
 
-          final hourLabel = '${startHour}:00-${endHour}:59';
+          final hourLabel = '$startHour:00';
           graphLabels.add(hourLabel);
 
           final hourlyTotal = completedBookings.where((b) {
@@ -180,7 +187,6 @@ class RevenueGraphGenerator {
         break;
 
       case RevenueFilter.weekly:
-        // Daily breakdown for this week
         final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
 
         for (int i = 0; i < 7; i++) {
@@ -198,7 +204,6 @@ class RevenueGraphGenerator {
         break;
 
       case RevenueFilter.mothely:
-        // Weekly breakdown for this month
         final startOfMonth = DateTime(now.year, now.month, 1);
         final endOfMonth = DateTime(now.year, now.month + 1, 0);
         final weeksInMonth = ((endOfMonth.day - startOfMonth.day) / 7).ceil();
@@ -228,7 +233,6 @@ class RevenueGraphGenerator {
         break;
 
       case RevenueFilter.yearly:
-        // Monthly breakdown for this year
         for (int month = 1; month <= 12; month++) {
           final monthName = DateFormat('MMM').format(DateTime(now.year, month));
           graphLabels.add(monthName);
@@ -262,6 +266,8 @@ class RevenueGraphGenerator {
   }
 }
 
+//! calculating growth percentage -> compraing to privious periods
+/// It is a future function return the percentage of growth
 Future<double> calculateGrowthPercentage(
   List<BookingModel> currentPeriodBookings,
   List<BookingModel> previousPeriodBookings,

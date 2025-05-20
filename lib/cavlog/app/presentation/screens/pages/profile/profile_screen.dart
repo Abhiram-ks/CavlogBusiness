@@ -51,8 +51,7 @@ class ProfileScreen extends StatelessWidget {
                             barber: state.barber,
                           );
                         }
-                        return LoadingScreen(
-                            screenHeight: screenHeight, screenWidth: screenWidth);
+                        return LoadingScreen(screenHeight: screenHeight, screenWidth: screenWidth);
                       },
                     ),
                   ),

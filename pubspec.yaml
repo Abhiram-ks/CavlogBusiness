@@ -106,6 +106,7 @@ flutter:
     - assets/lotties/adminRequstW8.json
     - assets/lotties/emptylistlottie.json
     - assets/lotties/pagenotfound.json
+    - assets/lotties/loadinglottie.json
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

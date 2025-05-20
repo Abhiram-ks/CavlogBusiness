@@ -56,6 +56,9 @@ class RevenueDashbordBloc extends Bloc<RevenueDashbordEvent, RevenueDashbordStat
         await emit.forEach<List<BookingModel>>(
           currentPeriodStream,
           onData: (currentBookings) {
+              if (currentBookings.isEmpty) {
+               return RevenueDashbordEmpty();
+              }
             final revenueUseCase = RevenueFilteringUsecase();
             
             final double totalEarnings = revenueUseCase.calculateEarningsForPeriod(currentBookings);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/themes/colors.dart';
-import '../../../../../../core/utils/constant/constant.dart';
 
 class TabBarDelegate extends SliverPersistentHeaderDelegate {
   final TabBar tabBar;
