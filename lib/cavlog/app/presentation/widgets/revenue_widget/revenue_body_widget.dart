@@ -1,6 +1,6 @@
 
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/revenue_dashbord_bloc/revenue_dashbord_bloc.dart';
-import 'package:barber_pannel/cavlog/app/presentation/screens/pages/revenue/revenue_trackr_screen.dart';
+import 'package:barber_pannel/cavlog/app/presentation/widgets/revenue_widget/revenue_custom_tracker.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/revenue_widget/revenue_dashbord_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

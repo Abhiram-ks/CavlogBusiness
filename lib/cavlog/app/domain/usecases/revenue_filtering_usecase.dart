@@ -289,3 +289,70 @@ Future<double> calculateGrowthPercentage(
 
   return percentageChange;
 }
+
+
+class RevenueGraphGeneratorCustom {
+  static Map<String, dynamic> generateGraphDataFromRangeCustom({
+    required List<BookingModel> bookings,
+    required DateTime startDate,
+    required DateTime endDate,
+  }) {
+    final completedBookings = bookings
+        .where((b) => b.serviceStatus.toLowerCase() == 'completed')
+        .toList();
+
+    if (completedBookings.isEmpty) {
+      final noDataLabels = List.generate(5, (_) => 'No Data');
+      final noDataValues = List.generate(5, (_) => 0.0);
+      return {
+        'graphLabels': noDataLabels,
+        'graphValues': noDataValues,
+        'maxY': 100.0,
+        'minY': 0.0,
+      };
+    }
+
+    final difference = endDate.difference(startDate).inDays + 1;
+    List<String> fullGraphLabels = [];
+    List<double> graphValues = [];
+
+    for (int i = 0; i < difference; i++) {
+      final currentDate = startDate.add(Duration(days: i));
+      final formattedDate = DateFormat('dd-MM-yyyy').format(currentDate);
+      final displayLabel = DateFormat('dd MMM').format(currentDate);
+
+      final dailyTotal = completedBookings
+          .where((b) => b.slotDate == formattedDate)
+          .fold(0.0, (sum, b) => sum + b.amountPaid);
+
+      fullGraphLabels.add(displayLabel);
+      graphValues.add(dailyTotal);
+    }
+
+    // Smart label selection
+    List<String> smartLabels = List.filled(difference, '');
+    if (difference <= 5) {
+      smartLabels = fullGraphLabels;
+    } else {
+      final selectedIndexes = <int>{0, difference - 1}; // start & end
+      final interval = (difference / 4).floor();
+      for (int i = 1; i < 4; i++) {
+        selectedIndexes.add(i * interval);
+      }
+      for (int i = 0; i < difference; i++) {
+        smartLabels[i] = selectedIndexes.contains(i) ? fullGraphLabels[i] : '';
+      }
+    }
+
+    final double maxY = graphValues.isEmpty
+        ? 100.0
+        : (graphValues.reduce((a, b) => a > b ? a : b) * 1.2).ceilToDouble();
+
+    return {
+      'graphLabels': smartLabels,
+      'graphValues': graphValues,
+      'maxY': maxY,
+      'minY': 0.0,
+    };
+  }
+}

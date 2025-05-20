@@ -2,7 +2,7 @@ import 'package:barber_pannel/cavlog/app/domain/usecases/data_listing_usecase.da
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetch_barber_service_bloc/fetch_barber_service_bloc.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetch_booking_bloc/fetch_booking_bloc.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetch_wallet_bloc/fetch_wallet_bloc.dart';
-import 'package:barber_pannel/cavlog/app/presentation/screens/pages/revenue/revenue_screen.dart';
+import 'package:barber_pannel/cavlog/app/presentation/widgets/revenue_widget/revenue_screen_body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,13 +59,13 @@ class RevenuePortionGridWidget extends StatelessWidget {
                   description: 'A clear snapshot of your earnings.',
                   icon: Icons.currency_rupee_sharp,
                   salesText: totalEarnings,
-                  iconColor: const Color.fromARGB(255, 160, 196, 139),
+                  iconColor: const Color.fromARGB(255, 164, 198, 145),
                 );
               },
             ),
           ),
           InkWell(
-            onTap: () => Navigator.pushNamed(context, AppRoutes.walletScreen),
+            onTap: () => Navigator.pushNamed(context, AppRoutes.revenueScreen),
             child: BlocBuilder<FetchBookingBloc, FetchBookingState>(
               builder: (context, state) {
                 String todayEarnings = '₹ 0';
@@ -122,8 +122,8 @@ class RevenuePortionGridWidget extends StatelessWidget {
                 return RevenueDetailsContainer(
                   gradient: const LinearGradient(
                     colors: [
-                      Colors.orange,
-                      Color.fromARGB(255, 255, 220, 164)
+                       Color(0xFF444444), 
+                       Color(0xFF888888), 
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -135,7 +135,7 @@ class RevenuePortionGridWidget extends StatelessWidget {
                       "The total count of every service you’ve provided",
                   icon: CupertinoIcons.wrench_fill,
                   salesText: serviceCount,
-                  iconColor: const Color.fromARGB(255, 255, 225, 181),
+                  iconColor: const Color.fromARGB(255, 118, 118, 118),
                 );
               },
             ),
