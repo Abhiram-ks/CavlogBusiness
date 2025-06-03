@@ -58,7 +58,7 @@ class _TimeManagementScreenState extends State<TimeManagementScreen> {
           double screenWidth = constraints.maxWidth;
 
           return ColoredBox(
-            color: AppPalette.scafoldClr ?? AppPalette.whiteClr,
+            color: AppPalette.hintClr,
             child: SafeArea(
               child: Scaffold(
                   appBar: CustomAppBar(),

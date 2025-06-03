@@ -99,7 +99,6 @@ class _UserProfileBodyWIdgetState extends State<UserProfileBodyWIdget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: widget.screenHeight * 0.02),
                   Text(
                     'Customer Dashboard',
                     style: GoogleFonts.plusJakartaSans(

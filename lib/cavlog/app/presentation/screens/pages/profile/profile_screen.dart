@@ -1,4 +1,5 @@
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetch_posts_bloc/fetch_posts_bloc.dart';
+import 'package:barber_pannel/cavlog/app/presentation/screens/settings/help_screen/help_screen.dart';
 import 'package:barber_pannel/core/common/common_loading_widget.dart';
 import 'package:barber_pannel/core/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,16 @@ class ProfileScreen extends StatelessWidget {
                         return LoadingScreen(screenHeight: screenHeight, screenWidth: screenWidth);
                       },
                     ),
+                    floatingActionButton: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HelpScreen()));
+                  },
+                  backgroundColor: AppPalette.orengeClr,
+                  child: Icon(
+                    Icons.smart_toy_sharp,
+                    color: AppPalette.whiteClr,
+                  ),
+                )
                   ),
                 ),
               ),

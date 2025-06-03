@@ -11,3 +11,6 @@ final class ButtonProgressSuccess  extends ButtonProgressState {}
 
 final class BottomSheetButtonLoading extends ButtonProgressState {}
 final class BottomSheetButtonSuccess extends ButtonProgressState {}
+
+final class MessageSendLoading extends ButtonProgressState {}
+final class MessageSendSuccess extends ButtonProgressState {}

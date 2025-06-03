@@ -29,7 +29,7 @@ class ServiceManageScreen extends StatelessWidget {
           double screenWidth = constraints.maxWidth;
 
           return ColoredBox(
-            color: AppPalette.scafoldClr ?? AppPalette.whiteClr,
+            color: AppPalette.hintClr,
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
               child: SafeArea(

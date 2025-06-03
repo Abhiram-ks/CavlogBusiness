@@ -43,7 +43,7 @@ class _RevenueScreenBodyWidgetState extends State<RevenueScreenBodyWidget> {
         padding: EdgeInsets.symmetric(horizontal: widget.screenWidth * .03),
         child: Column(
           children: [
-            ConstantWidgets.hight30(context),
+            ConstantWidgets.hight10(context),
             RevanueContainer(
                 screenWidth: widget.screenWidth,
                 screenHeight: widget.screenHeight),

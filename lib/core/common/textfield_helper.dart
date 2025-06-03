@@ -13,13 +13,27 @@ class TextFormFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String? value) validate;
   final bool enabled;
+  final Color? borderClr;
+  final Color? suffixIconColor;
+  final Color? fillClr;
+  final ValueChanged<String>? onChanged;
+  final IconData? suffixIconData;
+  final VoidCallback? suffixIconAction;
 
   const TextFormFieldWidget(
       {super.key,
       required this.label,
       required this.hintText,
       required this.prefixIcon,
-      this.isPasswordField = false, required this.controller,required this.validate, this.enabled = true});
+      this.isPasswordField = false, required this.controller,required this.validate, 
+      this.enabled = true,
+      this.borderClr,
+      this.fillClr,
+      this.suffixIconColor,
+      this.onChanged,
+      this.suffixIconData,
+      this.suffixIconAction,
+      });
 
     @override
   Widget build(BuildContext context) {
@@ -51,27 +65,36 @@ class TextFormFieldWidget extends StatelessWidget {
                   style: const TextStyle(fontSize: 16),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   enabled: enabled,
+                  onChanged: onChanged,
                   decoration: InputDecoration(
+                    filled: fillClr != null,
+                    fillColor: fillClr,
                     hintText: hintText,
                     hintStyle: TextStyle(color: AppPalette.hintClr),
                     prefixIcon: Icon(
                       prefixIcon,
                       color: const Color.fromARGB(255, 52, 52, 52),
                     ),
-                    suffixIcon: isPasswordField
-                        ? GestureDetector(
+                    suffixIcon: suffixIconData != null || isPasswordField ?  GestureDetector(
                             onTap: () {
+                              if (isPasswordField) {
                               context.read<IconCubit>().togglePasswordVisibility(isVisible);
+                              } 
+                              if (suffixIconData != null) {
+                                suffixIconAction?.call();  
+                              }
                             },
-                            child: Icon(
+                            child: isPasswordField ?
+                            Icon(
                               isVisible ? Icons.visibility : Icons.visibility_off,
                               color: Colors.black,
-                            ),
+                            ) : Icon(suffixIconData)
+
                           )
                         : null,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: AppPalette.hintClr, width: 1),
+                      borderSide: BorderSide(color:borderClr ?? AppPalette.hintClr, width: 1),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),

@@ -1,10 +1,11 @@
-
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 String formatTimeRange(DateTime startTime) {
   final String time = DateFormat.jm().format(startTime);
   return time;
 }
+
 String formatDate(DateTime dateTime) {
   final dateFormat = DateFormat('dd-MMM-yyyy');
   return dateFormat.format(dateTime);
@@ -24,7 +25,6 @@ double convertINRtoUSD(double amountInINR) {
   return amountInINR * exchangeRateINRtoUSD;
 }
 
-
 String formatIndianCurrency(double amount) {
   final formatCurrency = NumberFormat.currency(
     locale: 'en_IN',
@@ -32,4 +32,13 @@ String formatIndianCurrency(double amount) {
     decimalDigits: 2,
   );
   return formatCurrency.format(amount);
+}
+
+// Converts "dd-MM-yyyy" string to "dd/MM/yyyy - HH:mm" format
+/// This is useful for displaying the date in a more readable format and for open ai conversation
+String formatTimeOfDay(TimeOfDay time) {
+  final hour = time.hourOfPeriod == 0 ? 12 : time.hourOfPeriod;
+  final minute = time.minute.toString().padLeft(2, '0');
+  final period = time.period == DayPeriod.am ? 'AM' : 'PM';
+  return '$hour:$minute $period';
 }

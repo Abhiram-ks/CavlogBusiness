@@ -6,6 +6,9 @@ part 'image_picker_state.dart';
 class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
   final PickImageUseCase pickImageUseCase;
   ImagePickerBloc(this.pickImageUseCase) : super(ImagePickerInitial()) {
+        on<ClearImageAction>((event, emit) {
+        emit(ImagePickerInitial());
+        });
     on<PickImageAction>((event, emit) async{
        emit(ImagePickerLoading());
       try { 

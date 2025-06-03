@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/user_model.dart';
 
@@ -21,14 +19,12 @@ class FetchUserRepositoryImpl implements FetchUserRepository {
         try {
           return UserModel.fromMap(snapshot.id, snapshot.data() as Map<String, dynamic>);
         } catch (e) {
-          log('message: Error parsing user data: $e');
           return null;
         }
       }
       return null;
     })
     .handleError((e){
-      log('Error fetching user Data: $e');
     });
   }
 }

@@ -20,5 +20,13 @@ class ButtonProgressCubit extends Cubit<ButtonProgressState> {
   void bottomSheetStop() {
     emit(BottomSheetButtonSuccess());
   }
+
+    void sendButtonStart() {
+    emit(MessageSendLoading());
+  }
+
+  void sendButtonStop() {
+    emit(MessageSendSuccess());
+  }
 }
 
