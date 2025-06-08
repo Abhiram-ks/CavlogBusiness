@@ -45,7 +45,7 @@ class DeleteOldSlotsService {
           
           await docRef.delete();
         } catch (e) {
-          // Continue with other dates even if one fails
+          rethrow;
         }
       }
       

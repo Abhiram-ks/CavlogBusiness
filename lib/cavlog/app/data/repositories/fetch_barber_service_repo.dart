@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:barber_pannel/cavlog/app/data/models/barberservice_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -40,7 +39,6 @@ class FetchBarberServiceRepositoryImpl implements FetchBarberServiceRepository {
        }).toList();
     });
     } catch (e) {
-      log('message: Error occured $e');
       return Stream.value([]);
     }
   }
@@ -57,7 +55,6 @@ class FetchBarberServiceRepositoryImpl implements FetchBarberServiceRepository {
       await docRef.update({'services.$serviceKey': FieldValue.delete()});
       return true;
     } catch (e) {
-       log('❌ Error deleting service barber: $e');
       return false;
     }
   }

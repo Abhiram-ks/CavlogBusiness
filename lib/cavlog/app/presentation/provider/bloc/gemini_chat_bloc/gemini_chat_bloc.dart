@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
-
 part 'gemini_chat_event.dart';
 part 'gemini_chat_state.dart';
 

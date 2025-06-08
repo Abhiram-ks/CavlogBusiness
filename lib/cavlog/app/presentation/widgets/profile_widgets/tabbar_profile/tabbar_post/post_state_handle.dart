@@ -1,3 +1,4 @@
+import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/image_picker/image_picker_bloc.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/modifications/upload_post_bloc/upload_post_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,8 +8,9 @@ import '../../../../../../../core/common/snackbar_helper.dart';
 import '../../../../../../../core/themes/colors.dart';
 import '../../../../../../auth/presentation/provider/cubit/buttonProgress/button_progress_cubit.dart';
 
-void handlePostStateHelper(BuildContext context, UploadPostState state) {
+void handlePostStateHelper(BuildContext context, UploadPostState state, final TextEditingController controller) {
   final buttonCubit = context.read<ButtonProgressCubit>();
+  final imageClear =  context.read<ImagePickerBloc>();
   if (state is UploadPostShowAlert) {
     BottomSheetHelper().showBottomSheet(
         context: context,
@@ -35,6 +37,8 @@ void handlePostStateHelper(BuildContext context, UploadPostState state) {
       description: 'We couldn’t upload the session: ${state.errorMessage}. Please try again later.',
       titleClr: AppPalette.redClr);
     } else if (state is UploadPostSuccess) {
+      imageClear.add(ClearImageAction());
+      controller.clear();
       buttonCubit.stopLoading();
       CustomeSnackBar.show(
       context: context, 

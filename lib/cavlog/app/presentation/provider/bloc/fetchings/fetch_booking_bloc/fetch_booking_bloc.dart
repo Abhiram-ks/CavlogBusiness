@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +43,7 @@ class FetchBookingBloc extends Bloc<FetchBookingEvent, FetchBookingState> {
           return FetchBookingFailure('Could not load booking data. Please try again later.');
         },
       );
-    } catch (e, st) {
-      log('Exception while fetching bookings: $e\n$st');
+    } catch (e) {
       emit(FetchBookingFailure('An unexpected error occurred. Please check your connection.'));
     }
   }
@@ -64,18 +63,13 @@ class FetchBookingBloc extends Bloc<FetchBookingEvent, FetchBookingState> {
       }
 
       await emit.forEach<List<BookingModel>>(
-        _bookingTransactionRepository.streamBookings(barberId: barberUid),
+        _bookingTransactionRepository.streamBookingFiltering(barberId: barberUid,status: event.status),
         onData: (datas) {
-          final filteredStatus = datas
-              .where((data) => data.serviceStatus
-                  .toLowerCase()
-                  .contains(event.status.toLowerCase()))
-              .toList();
 
-          if (filteredStatus.isEmpty) {
+          if (datas.isEmpty) {
             return FetchBookingEmpty();
           } else {
-            return FetchBookingSuccess(bookings: filteredStatus);
+            return FetchBookingSuccess(bookings: datas);
           }
         },
         onError: (error, stackTrace) {
@@ -102,18 +96,13 @@ class FetchBookingBloc extends Bloc<FetchBookingEvent, FetchBookingState> {
       }
 
       await emit.forEach<List<BookingModel>>(
-        _bookingTransactionRepository.streamBookings(barberId: barberUid),
+        _bookingTransactionRepository.streamBookingTransaction(barberId: barberUid,status: event.fillterText),
         onData: (datas) {
-          final filteredTransaction = datas
-              .where((data) => data.transaction
-                  .toLowerCase()
-                  .contains(event.fillterText.toLowerCase()))
-              .toList();
 
-          if (filteredTransaction.isEmpty) {
+          if (datas.isEmpty) {
             return FetchBookingEmpty();
           } else {
-            return FetchBookingSuccess(bookings: filteredTransaction);
+            return FetchBookingSuccess(bookings: datas);
           }
         },
         onError: (error, stackTrace) {

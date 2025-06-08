@@ -25,7 +25,7 @@ class RevenuePortionGridWidget extends StatelessWidget {
       width: double.infinity,
       height: widget.screenHeight * 0.9,
       child: GridView.count(
-        crossAxisCount: 2,
+        crossAxisCount:widget.screenWidth > 600 ? 3 :  2,
         crossAxisSpacing: 6,
         mainAxisSpacing: 6,
         addAutomaticKeepAlives: true,

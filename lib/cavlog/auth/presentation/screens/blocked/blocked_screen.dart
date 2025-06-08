@@ -25,7 +25,7 @@ class BlockedScreen extends StatelessWidget {
             physics:const BouncingScrollPhysics(),
           child: Padding(
              padding: EdgeInsets.symmetric(
-              horizontal: screenWidth * 0.08,
+              horizontal:screenWidth > 600 ? screenWidth *.3 :  screenWidth * 0.08,
             ),
             child: BlockedAcWidget(screenHeight: screenHeight, screenWidth: screenWidth,),),
          )),

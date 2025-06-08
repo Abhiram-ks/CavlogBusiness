@@ -44,7 +44,7 @@ class IndivitualBookingFilteringCard extends StatelessWidget {
               onTap: () {
                 context.read<FetchBookingUserBloc>().add(
                     FetchBookingUserFiltering(
-                        filter: 'completed', userId: userId));
+                        filter: 'Completed', userId: userId));
               },
             ),
             VerticalDivider(color: AppPalette.hintClr),
@@ -55,7 +55,7 @@ class IndivitualBookingFilteringCard extends StatelessWidget {
               onTap: () {
                 context.read<FetchBookingUserBloc>().add(
                     FetchBookingUserFiltering(
-                        filter: 'cancelled', userId: userId));
+                        filter: 'Cancelled', userId: userId));
               },
             ),
             VerticalDivider(color: AppPalette.hintClr),
@@ -66,7 +66,7 @@ class IndivitualBookingFilteringCard extends StatelessWidget {
               onTap: () {
                 context.read<FetchBookingUserBloc>().add(
                     FetchBookingUserFiltering(
-                        filter: 'pending', userId: userId));
+                        filter: 'Pending', userId: userId));
               },
             ),
           ],

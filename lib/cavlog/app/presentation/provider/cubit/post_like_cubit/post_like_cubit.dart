@@ -1,6 +1,4 @@
 
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,7 +28,7 @@ class LikePostCubit extends Cubit<void> {
             : FieldValue.arrayUnion([barberId]),
       });
     } catch (e) {
-      log('Error toggling like: $e');
+      rethrow;
     }
   }
 }

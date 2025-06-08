@@ -6,8 +6,10 @@ import 'package:barber_pannel/core/themes/colors.dart';
 import 'package:barber_pannel/core/utils/image/app_images.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pinch_to_zoom_scrollable/pinch_to_zoom_scrollable.dart';
 import '../../../../../core/common/common_action_button.dart';
 import '../../../../../core/utils/constant/constant.dart';
 import '../../../data/models/barber_model.dart';
@@ -54,8 +56,12 @@ class UploadingServiceDatas extends StatelessWidget {
               child: BlocBuilder<ImagePickerBloc, ImagePickerState>(
                 builder: (context, state) {
                   if (state is ImagePickerInitial) {
-                    if (barber.detailImage != null &&barber.detailImage!.isNotEmpty &&barber.detailImage!.startsWith('http')) {
-                      return SizedBox( width: screenWidth * 0.89, height: screenHeight * 0.22,
+                    if (barber.detailImage != null &&
+                        barber.detailImage!.isNotEmpty &&
+                        barber.detailImage!.startsWith('http')) {
+                      return SizedBox(
+                        width: screenWidth * 0.89,
+                        height: screenHeight * 0.22,
                         child: imageshow(
                           imageUrl: barber.detailImage!,
                           imageAsset: AppImages.loginImageAbove,
@@ -69,31 +75,31 @@ class UploadingServiceDatas extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(CupertinoIcons.cloud_upload,size: 35, color: AppPalette.buttonClr,
-                            ),const Text('Upload an Image'),
+                            Icon(
+                              CupertinoIcons.cloud_upload,
+                              size: 35,
+                              color: AppPalette.buttonClr,
+                            ),
+                            const Text('Upload an Image'),
                           ],
                         ),
                       );
                     }
                   } else if (state is ImagePickerLoading) {
-                    return const CupertinoActivityIndicator(radius: 16.0,  );
+                    return const CupertinoActivityIndicator(radius: 16.0);
                   } else if (state is ImagePickerSuccess) {
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.file(
-                        File(state.imagePath),
-                        width: screenWidth * 0.89,
-                        height: screenHeight * 0.22,
-                        fit: BoxFit.cover,
-                      ),
-                    );
+                    return buildImagePreview(state: state,screenWidth: screenWidth*0.86,screenHeight: screenHeight*41,radius: 12);
                   } else if (state is ImagePickerError) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(  CupertinoIcons.photo,size: 35, color: AppPalette.redClr,
-                        ), Text(state.errorMessage)
+                        Icon(
+                          CupertinoIcons.photo,
+                          size: 35,
+                          color: AppPalette.redClr,
+                        ),
+                        Text(state.errorMessage)
                       ],
                     );
                   }
@@ -101,8 +107,12 @@ class UploadingServiceDatas extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(  CupertinoIcons.cloud_upload, size: 35,color: AppPalette.buttonClr,
-                      ), Text('Upload an Images')
+                      Icon(
+                        CupertinoIcons.cloud_upload,
+                        size: 35,
+                        color: AppPalette.buttonClr,
+                      ),
+                      Text('Upload an Images')
                     ],
                   );
                 },
@@ -111,15 +121,19 @@ class UploadingServiceDatas extends StatelessWidget {
           ),
         ),
         ConstantWidgets.hight20(context),
-        const Text(   "Select Gender", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),  ConstantWidgets.hight10(context),
+        const Text(
+          "Select Gender",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        ConstantWidgets.hight10(context),
         BlocBuilder<GenderOptionCubit, GenderOption>(
           builder: (context, selectedGender) {
             return Wrap(
               alignment: WrapAlignment.spaceEvenly,
               spacing: 10,
               children: GenderOption.values.map((gender) {
-                Color activeColor; String label;
+                Color activeColor;
+                String label;
 
                 switch (gender) {
                   case GenderOption.male:
@@ -145,10 +159,13 @@ class UploadingServiceDatas extends StatelessWidget {
                       activeColor: activeColor,
                       onChanged: (value) {
                         if (value != null) {
-                          context .read<GenderOptionCubit>().selectGenderOption(value);
+                          context
+                              .read<GenderOptionCubit>()
+                              .selectGenderOption(value);
                         }
                       },
-                    ), Text(label),
+                    ),
+                    Text(label),
                   ],
                 );
               }).toList(),
@@ -167,16 +184,21 @@ class UploadingServiceDatas extends StatelessWidget {
                 final genderState = context.read<GenderOptionCubit>().state;
 
                 if (imageState is ImagePickerSuccess) {
-                  context.read<UploadServiceDataBloc>().add( UploadServiceDataRequest( imagePath: imageState.imagePath, genderOption: genderState));
+                  context.read<UploadServiceDataBloc>().add(
+                      UploadServiceDataRequest(
+                          imagePath: imageState.imagePath ?? '',
+                          imageBytes: kIsWeb ? imageState.imageBytes : null,
+                          genderOption: genderState));
                 } else {
                   CustomeSnackBar.show(
                       context: context,
                       title: 'Image Not Found!',
-                      description:'Unable to proceed. Image not found. Please make sure an image is selected.',
+                      description: 'Unable to proceed. Image not found. Please make sure an image is selected.',
                       titleClr: AppPalette.redClr);
                 }
               },
-              label: 'Upload', screenHight: screenHeight),
+              label: 'Upload',
+              screenHight: screenHeight),
         )
       ],
     );
@@ -194,4 +216,41 @@ GenderOption getGenderOptionFromString(String? gender) {
     default:
       return GenderOption.unisex;
   }
+}
+
+
+Widget buildImagePreview({required ImagePickerSuccess state,required double screenWidth,required double screenHeight,required int radius}) {
+  final imageWidget = () {
+    if (kIsWeb && state.imageBytes != null) {
+      return Image.memory(
+        state.imageBytes!,
+        width: screenWidth,
+        height: screenHeight,
+        fit: screenWidth > 600 ? BoxFit.contain : BoxFit.cover,
+      );
+    } else if (state.imagePath != null && state.imagePath!.startsWith('http')) {
+      return Image.network(
+        state.imagePath!,
+        width: screenWidth ,
+        height: screenHeight,
+        fit: BoxFit.cover,
+      );
+    } else if (state.imagePath != null && state.imagePath!.isNotEmpty) {
+      return Image.file(
+        File(state.imagePath!),
+        width: screenWidth,
+        height: screenHeight,
+        fit: BoxFit.cover,
+      );
+    } else {
+      return const Text("No image selected");
+    }
+  }();
+
+  return PinchToZoomScrollableWidget(
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: imageWidget,
+    ),
+  );
 }

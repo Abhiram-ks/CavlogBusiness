@@ -1,4 +1,5 @@
 import 'package:barber_pannel/cavlog/app/data/repositories/image_picker_repo.dart';
+import 'package:barber_pannel/cavlog/app/domain/usecases/imageuploadon_cloud_usecase.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/image_picker/image_picker_bloc.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/modifications/upload_service_data_bloc/upload_service_data_bloc.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/cubit/current_service_cubit/current_service_cubit.dart';
@@ -26,7 +27,7 @@ class ServiceScreen extends StatelessWidget {
         BlocProvider(create: (context) => ServicePageCubit()),
         BlocProvider(create: (context) => FetchRatingAvgCubit()),
         BlocProvider(create: (context) => ImagePickerBloc(PickImageUseCase(ImagePickerRepositoryImpl(ImagePicker())))),
-        BlocProvider(create: (context) => UploadServiceDataBloc(FirestoreBarberService(), CloudinaryService())),
+        BlocProvider(create: (context) => UploadServiceDataBloc(FirestoreBarberService(), CloudinaryService(),ImageUploaderMobile(CloudinaryService()))),
         BlocProvider(create: (context) => GenderOptionCubit(initialGender: getGenderOptionFromString(null))),
       ],
       child: LayoutBuilder(

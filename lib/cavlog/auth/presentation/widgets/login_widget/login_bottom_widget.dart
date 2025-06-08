@@ -31,7 +31,7 @@ class LotinBottomSection extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: screenWidth * 0.08, vertical: screenHight * 0.03),
+            horizontal: screenWidth > 600 ? screenWidth *.3 :  screenWidth * 0.08, vertical: screenHight * 0.03),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

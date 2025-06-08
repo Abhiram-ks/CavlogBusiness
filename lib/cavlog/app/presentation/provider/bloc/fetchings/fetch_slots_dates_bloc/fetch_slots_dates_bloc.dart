@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:barber_pannel/cavlog/app/data/models/date_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -22,14 +20,11 @@ class FetchSlotsDatesBloc extends Bloc<FetchSlotsDatesEvent, FetchSlotsDatesStat
 Future<void> _onFetchSlotsDatesRequest(
    FetchSlotsDateRequest event, Emitter<FetchSlotsDatesState> emit) async {
    emit(FetchSlotsDateLoading());
-   log('the date fetching was working');
-   
    try {
      final SharedPreferences prefs = await SharedPreferences.getInstance();
      final String? barberUid = prefs.getString('barberUid');
 
      if (barberUid == null) {
-       log('Fetching slots failed due to: Barber UID not found');
        emit(FetchSlotsDateFailure('Barber UID not found'));
        return;
      }
@@ -38,7 +33,6 @@ Future<void> _onFetchSlotsDatesRequest(
        emit(FetchSlotsDatesSuccess(dates));
      });
    } catch (e) {
-     log('Error in _onFetchSlotsDatesRequest: $e');
      emit(FetchSlotsDateFailure('An error occurred'));
    }
  }

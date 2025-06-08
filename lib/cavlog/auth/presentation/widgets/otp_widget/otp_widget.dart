@@ -80,7 +80,7 @@ class _OtpVerificationWidgetState extends State<OtpVerificationWidget> {
                   final isVarification = context.read<RegisterSubmitionBloc>();
 
                   buttonCubit.startLoading();
-                  await Future.delayed(const Duration(seconds: 3));
+                  await Future.delayed(const Duration(seconds: 2));
                   final String userOTP = getUserOTP();
                   isVarification.add(VerifyOTPEvent(
                     inputOtp: userOTP,

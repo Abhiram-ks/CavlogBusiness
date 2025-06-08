@@ -25,7 +25,7 @@ final squareSize = (screenSize.width < screenSize.height ? screenSize.width : sc
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: screenWidth * .03),
+        padding: EdgeInsets.symmetric(horizontal:screenWidth > 600 ? screenWidth * .15 : screenWidth * .03),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:barber_pannel/cavlog/app/data/models/slot_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,6 @@ class FetchSlotsSpecificdateBloc extends Bloc<FetchSlotsSpecificdateEvent, Fetch
     Emitter<FetchSlotsSpecificDateState> emit,
   ) async {
     emit(FetchSlotsSpecificDateLoading());
-    log('Fetching date in specific day : ${event.selectedDate}');
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       final String? barberUid = prefs.getString('barberUid');

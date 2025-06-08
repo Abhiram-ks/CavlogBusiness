@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-
 import '../../../../../../core/utils/constant/constant.dart';
 
 class BookingFilteringCards extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:barber_pannel/cavlog/app/data/models/slot_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +28,6 @@ class FetchSlotsRepositoryImpl implements FetchSlotsRepository {
           return DateModel.fromDocument(doc);
         }).toList();
       } catch (e) {
-        log('Error fetching dates: $e');
         return <DateModel>[];  
       }
     });
@@ -37,7 +36,6 @@ class FetchSlotsRepositoryImpl implements FetchSlotsRepository {
   @override
   Stream<List<SlotModel>> streamSlots({required String barberUid, required DateTime selectedDate }) {
     String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
-    log('formatted Date in fetching specific day is: $formattedDate');
 
     final datesCollection = _firestore
         .collection('slots')
@@ -53,10 +51,8 @@ class FetchSlotsRepositoryImpl implements FetchSlotsRepository {
         final List<SlotModel> allSlots = slotSnapshot.docs.map((doc) => SlotModel.fromMap(doc.data())).toList();
 
         allSlots.sort((a,b) => a.startTime.compareTo(b.startTime));
-        log('return fetching datas is $allSlots');
         return allSlots;
       } catch (e) {
-        log('Error fetching slots: $e');
         return <SlotModel>[];
       }
     });

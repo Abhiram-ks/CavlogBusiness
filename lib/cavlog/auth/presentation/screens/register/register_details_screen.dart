@@ -26,7 +26,7 @@ class RegisterDetailsScreen extends StatelessWidget {
               physics: BouncingScrollPhysics(),
               child: Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth * 0.08,
+                    horizontal:screenWidth > 600 ? screenWidth *.3 :  screenWidth * 0.08,
                   ),child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

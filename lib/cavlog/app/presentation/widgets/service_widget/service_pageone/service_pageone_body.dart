@@ -33,7 +33,7 @@ class _RatingAndReviewWidgetState extends State<RatingAndReviewWidget> {
     return SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: widget.screenWidth * .04),
+          padding: EdgeInsets.symmetric(horizontal: widget.screenWidth > 600 ? widget.screenWidth *.15 : widget.screenWidth * .04),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

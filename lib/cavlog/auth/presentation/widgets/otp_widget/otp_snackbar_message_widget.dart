@@ -1,12 +1,17 @@
 
+
+import 'package:barber_pannel/cavlog/auth/presentation/provider/cubit/buttonProgress/button_progress_cubit.dart';
+import 'package:barber_pannel/cavlog/auth/presentation/widgets/otp_widget/navigation_to_admin.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/common/snackbar_helper.dart';
 import '../../../../../core/themes/colors.dart';
 import '../../provider/bloc/RegisterSubmition/register_submition_bloc.dart';
 
 void handleOtpState(
     BuildContext context, RegisterSubmitionState state, bool otpsed) {
+      final buttonCubit = context.read<ButtonProgressCubit>();
+
   if (state is OtpLoading) {
     CustomeSnackBar.show(
       context: context,
@@ -36,7 +41,41 @@ void handleOtpState(
           : "We couldn't resend the email. Error: ${state.error}",
       titleClr: AppPalette.redClr,
     );
+  } else if (state is RegisterLoading){
+    buttonCubit.startLoading();
   }
+  else if (state is RegisterSuccess){
+    buttonCubit.stopLoading();
+    navigateToAdminRequest(context);
+  }
+  else if (state is RegisterFailure) {
+  buttonCubit.stopLoading();
+
+  showCupertinoDialog(
+    context: context,
+    builder: (_) => CupertinoAlertDialog(
+      title: Text('Registration Failed'),
+      content: Text('Something went wrong. Please try again.'),
+      actions: [
+        CupertinoDialogAction(
+          child: Text('Retry',style: TextStyle(color: AppPalette.redClr)),
+          onPressed: () {
+            Navigator.of(context).pop();
+           context.read<RegisterSubmitionBloc>().add((SubmitRegistration()));
+          },
+        ),
+        CupertinoDialogAction(
+          isDestructiveAction: true,
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text('Cancel',style: TextStyle(color: AppPalette.blackClr),),
+        ),
+      ],
+    ),
+  );
+}
+
 }
 
 

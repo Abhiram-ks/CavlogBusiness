@@ -41,7 +41,7 @@ class MybookingFilteringCards extends StatelessWidget {
               icon: Icons.check_circle_outline_sharp,
               colors: Colors.green,
               onTap: () {
-                context.read<FetchBookingWithBarberBloc>().add(FetchBookingWithUserFileterRequest(filtering: 'completed'));
+                context.read<FetchBookingWithBarberBloc>().add(FetchBookingWithUserFileterRequest(filtering: 'Completed'));
               },
             ),
             VerticalDivider(color: AppPalette.hintClr),
@@ -50,7 +50,7 @@ class MybookingFilteringCards extends StatelessWidget {
               icon: Icons.free_cancellation_rounded,
               colors: AppPalette.redClr,
               onTap: () {
-                  context.read<FetchBookingWithBarberBloc>().add(FetchBookingWithUserFileterRequest(filtering: 'cancelled'));
+                  context.read<FetchBookingWithBarberBloc>().add(FetchBookingWithUserFileterRequest(filtering: 'Cancelled'));
               },
             ),
             VerticalDivider(color: AppPalette.hintClr),
@@ -59,7 +59,7 @@ class MybookingFilteringCards extends StatelessWidget {
               icon: Icons.pending_actions_rounded,
               colors: AppPalette.orengeClr,
               onTap: () {
-                context.read<FetchBookingWithBarberBloc>().add(FetchBookingWithUserFileterRequest(filtering: 'pending'));
+                context.read<FetchBookingWithBarberBloc>().add(FetchBookingWithUserFileterRequest(filtering: 'Pending'));
               },
             ),
           ],

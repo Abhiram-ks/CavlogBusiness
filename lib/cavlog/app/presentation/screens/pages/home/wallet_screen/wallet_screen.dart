@@ -16,9 +16,7 @@ class WalletScreen extends StatelessWidget {
       providers: [
         BlocProvider(
          create: (context) => FetchBookingBloc(FetchBookingRepositoryImpl())),
-        BlocProvider(
-            create: (context) =>
-                FetchWalletBloc(FetchBarberWalletRepositoryImpl())),
+        BlocProvider( create: (context) => FetchWalletBloc(FetchBarberWalletRepositoryImpl())),
       ],
       child: LayoutBuilder(builder: (context, constraints) {
         double screenHeight = constraints.maxHeight;
@@ -39,8 +37,3 @@ class WalletScreen extends StatelessWidget {
 }
 
 
-
-String calculateReducedAmount(double amount, double percentage) {
-  final reducedAmount = amount - (amount * percentage / 100);
-  return reducedAmount.toStringAsFixed(2);
-}

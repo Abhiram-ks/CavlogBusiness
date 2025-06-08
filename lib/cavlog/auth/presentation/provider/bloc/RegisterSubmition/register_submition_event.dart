@@ -22,7 +22,6 @@ class UpdateCredentials  extends RegisterSubmitionEvent {
 }
 
 class SubmitRegistration extends RegisterSubmitionEvent { }
-
 class GenerateOTPEvent extends RegisterSubmitionEvent {}
 
 class VerifyOTPEvent extends RegisterSubmitionEvent{

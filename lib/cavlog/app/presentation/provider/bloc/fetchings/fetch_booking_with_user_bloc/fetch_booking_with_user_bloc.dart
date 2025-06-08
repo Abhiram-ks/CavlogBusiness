@@ -3,7 +3,6 @@ import 'package:barber_pannel/cavlog/app/data/repositories/fetch_booking_with_us
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 part 'fetch_booking_with_user_event.dart';
 part 'fetch_booking_with_user_state.dart';
 
@@ -59,22 +58,21 @@ class FetchBookingWithBarberBloc extends Bloc<FetchBookingWithUserEvent, FetchBo
         emit(FetchBookingWithUserFailure('Shop ID not found. Please log in again.'));
         return;
       }
-
-         await emit.forEach<List<BookingWithUserModel>>(
-       _repository.streamBookingsWithUser(barberID: barberUid),
-       onData: (bookings) {
-        final filteredBooking = bookings.where((booking) => booking.booking.serviceStatus.toLowerCase().contains(event.filtering.toLowerCase())).toList();
-
-        if (filteredBooking.isEmpty) {
-          return FetchBookingWithUserEmpty();
-        }else {
-          return FetchBookingWithUserLoaded(combo: filteredBooking);
-        }
-       },
+        
+     await emit.forEach<List<BookingWithUserModel>>(
+        _repository.streamBookingFiltering(barberID: barberUid, status: event.filtering),
+        onData: (filterData) {
+          if (filterData.isEmpty) {
+            return FetchBookingWithUserEmpty();
+          } else {
+            return FetchBookingWithUserLoaded(combo: filterData);
+          }
+        },
         onError: (error, stackTrace) {
-        return FetchBookingWithUserFailure('Filtering failed: $error');
-      },
-       );
+          return FetchBookingWithUserFailure(
+              'could not load booking data. Please try again leter.');
+        },
+      );
 
     } catch (e) {
        emit(FetchBookingWithUserFailure('An unexpected error occurred: ${e.toString()}'));

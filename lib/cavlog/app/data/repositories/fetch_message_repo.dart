@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:barber_pannel/cavlog/app/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,7 +36,6 @@ Stream<List<UserModel>> streamChat({required String barberId}) {
     final userStreams = userIds
         .map((id) => _repository.streamUserData(id)
             .handleError((e) {
-              log('Error streaming barber $id: $e');
             }))
         .toList();
 

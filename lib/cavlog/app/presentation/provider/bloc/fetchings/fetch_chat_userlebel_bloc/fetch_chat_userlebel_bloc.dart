@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:barber_pannel/cavlog/app/data/models/user_model.dart';
 import 'package:barber_pannel/cavlog/app/data/repositories/fetch_message_repo.dart';
 import 'package:bloc/bloc.dart';
@@ -34,11 +34,10 @@ class FetchChatUserlebelBloc extends Bloc<FetchChatUserlebelEvent, FetchChatUser
           if (chat.isEmpty) {
             return FetchChatUserlebelEmpty();
           } else {
-            return FetchChatUserlebelSuccess(chat);
+            return FetchChatUserlebelSuccess(users:chat,barberId: barberUid);
           }
         },
            onError: (error, stackTrace) {
-          log('Stream error: $error\n$stackTrace');
           return FetchChatUserlebelFailure();
         },
         );
@@ -68,7 +67,7 @@ class FetchChatUserlebelBloc extends Bloc<FetchChatUserlebelEvent, FetchChatUser
         if (filteredBarbers.isEmpty) {
            return FetchChatUserlebelEmpty();
         }else {
-           return FetchChatUserlebelSuccess(filteredBarbers);
+           return FetchChatUserlebelSuccess(users: filteredBarbers,barberId: barberUid);
         }
       },
        onError: (error, stackTrace) {

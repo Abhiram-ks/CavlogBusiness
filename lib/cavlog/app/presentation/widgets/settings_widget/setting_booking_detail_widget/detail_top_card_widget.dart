@@ -15,7 +15,9 @@ SizedBox paymentSectionBarberData(
     required String shopAddress,
     required String email,
     required double screenWidth,
-    required double screenHeight}) {
+    required double screenHeight,
+    Color? textColor,
+    Color? addressColor}) {
   return SizedBox(
     height: screenHeight * 0.12,
     child: Row(
@@ -39,36 +41,38 @@ SizedBox paymentSectionBarberData(
         ConstantWidgets.width20(context),
         Expanded(
           flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                shopName,
-                style: GoogleFonts.plusJakartaSans(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: AppPalette.whiteClr),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              profileviewWidget(
-                screenWidth,
-                context,
-                Icons.location_on,
-                shopAddress,
-                AppPalette.redClr,
-                maxLines: 2,
-                textColor: AppPalette.hintClr,
-              ),
-              Text(
-                email,
-                style: GoogleFonts.plusJakartaSans(color: AppPalette.whiteClr),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              ConstantWidgets.width40(context),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  shopName,
+                  style: GoogleFonts.plusJakartaSans(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color:textColor ?? AppPalette.whiteClr),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                profileviewWidget(
+                  screenWidth,
+                  context,
+                  Icons.location_on,
+                  shopAddress,
+                  AppPalette.redClr,
+                  maxLines: 2,
+                  textColor:addressColor ?? AppPalette.hintClr,
+                ),
+                Text(
+                  email,
+                  style: GoogleFonts.plusJakartaSans(color:textColor ?? AppPalette.whiteClr),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                ConstantWidgets.width40(context),
+              ],
+            ),
           ),
         ),
         ConstantWidgets.width20(context),

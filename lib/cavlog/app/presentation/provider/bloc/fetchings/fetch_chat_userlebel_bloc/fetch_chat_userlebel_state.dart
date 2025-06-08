@@ -9,7 +9,8 @@ final class FetchChatUserlebelLoading extends FetchChatUserlebelState {}
 final class FetchChatUserlebelEmpty extends FetchChatUserlebelState {}
 final class FetchChatUserlebelSuccess extends FetchChatUserlebelState {
   final List<UserModel> users;
+  final String barberId;
 
-  FetchChatUserlebelSuccess(this.users);
+  FetchChatUserlebelSuccess({required this.users, required this.barberId});
 }
 final class FetchChatUserlebelFailure  extends FetchChatUserlebelState {}

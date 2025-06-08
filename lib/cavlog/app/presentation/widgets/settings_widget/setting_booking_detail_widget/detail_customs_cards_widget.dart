@@ -68,7 +68,7 @@ IconButton iconsFilledDetail(
           forgroudClr:colors ?? Color(0xFFFEBA43),
           context: context,
           borderRadius: 15,
-          padding: screenWidth * .05,
+          padding:screenWidth > 600 ? 30 : screenWidth * .05,
           fillColor: Color.fromARGB(255, 248, 239, 216),
           onTap: onTap,
         ),

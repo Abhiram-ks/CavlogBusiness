@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -51,7 +51,6 @@ class FirestoreBarberService {
       });
       return true;
     } catch (e) {
-      log('Error updating barber fields: $e');
       return false;
     }
   }

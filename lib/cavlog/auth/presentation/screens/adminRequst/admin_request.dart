@@ -21,7 +21,7 @@ class AdminRequest extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(
-              backgroundColor: AppPalette.whiteClr,
+              backgroundColor: AppPalette.scafoldClr,
               iconTheme: IconThemeData(color: AppPalette.blackClr),
               elevation: 0,
               scrolledUnderElevation: 0,
@@ -34,7 +34,7 @@ class AdminRequest extends StatelessWidget {
             ),
              body: SafeArea(
                child: Padding(
-               padding: EdgeInsets.symmetric( horizontal: screenWidth * 0.08),
+               padding: EdgeInsets.symmetric( horizontal: screenWidth > 600 ? screenWidth *.3 : screenWidth * 0.08),
                child: ListView(
                 children: [
                   AdminRequestWidget(screenWidth: screenWidth, screenHight: screenHight)

@@ -1,6 +1,4 @@
 
-import 'dart:developer';
-
 import 'package:barber_pannel/cavlog/app/data/models/barber_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +17,6 @@ class AuthRepositoryImpl implements AuthRepository {
   Stream<BarberModel?> login(String email, String password) async* {
     try {
       final String hashedPassword = Hashfunction.generateHash(password);
-      log('message: $hashedPassword');
       yield* Stream.fromFuture(_auth.signInWithEmailAndPassword(email: email, password: hashedPassword)).asyncMap((UserCredential userCredential) async {
           if (userCredential.user != null) {
             String uid = userCredential.user!.uid;

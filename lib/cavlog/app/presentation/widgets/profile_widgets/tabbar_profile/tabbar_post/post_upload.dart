@@ -1,10 +1,10 @@
-import 'dart:io';
-
 import 'package:barber_pannel/cavlog/app/presentation/widgets/profile_widgets/tabbar_profile/tabbar_post/post_state_handle.dart';
+import 'package:barber_pannel/cavlog/app/presentation/widgets/service_widget/service_widget_upload_datas.dart';
 import 'package:barber_pannel/core/common/snackbar_helper.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart'
     show CupertinoActivityIndicator, CupertinoIcons;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../../core/common/common_action_button.dart';
@@ -44,7 +44,7 @@ class _TabbarAddPostState extends State<TabbarAddPost> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: widget.screenWidth * .05),
+      padding: EdgeInsets.symmetric(horizontal: widget.screenWidth > 600 ? widget.screenWidth *.15 :  widget.screenWidth * .05),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -72,14 +72,7 @@ class _TabbarAddPostState extends State<TabbarAddPost> {
                                 radius: 16.0,
                               );
                             } else if (state is ImagePickerSuccess) {
-                              return ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: Image.file(
-                                    File(state.imagePath),
-                                    width: widget.screenWidth * 0.89,
-                                    height: widget.screenHeight * 0.22,
-                                    fit: BoxFit.cover,
-                                  ));
+                               return buildImagePreview(state: state,screenWidth: widget.screenWidth * 0.89,screenHeight:widget.screenHeight * 0.22,radius: 12);
                             } else if (state is ImagePickerError) {
                               return Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -125,7 +118,7 @@ class _TabbarAddPostState extends State<TabbarAddPost> {
             ConstantWidgets.hight10(context),
             BlocListener<UploadPostBloc, UploadPostState>(
               listener: (context, state) {
-               handlePostStateHelper(context, state);
+               handlePostStateHelper(context, state, _descriptionController);
               },
               child: ActionButton(
                   screenWidth: widget.screenWidth,
@@ -136,7 +129,8 @@ class _TabbarAddPostState extends State<TabbarAddPost> {
                       context.read<UploadPostBloc>().add(
                         UploadPostEventRequst(
                           barberId: widget.barberId, 
-                          imageUrl: imageState.imagePath, 
+                          imageUrl: imageState.imagePath ?? '', 
+                          imageBytes: kIsWeb ? imageState.imageBytes : null,
                           description: _descriptionController.text)
                       );
                       } else {

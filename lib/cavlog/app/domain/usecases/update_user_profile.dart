@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -18,7 +17,6 @@ class UpdateUserProfileUseCase {
       final docSnapshot = await userDocRef.get();
 
       if (!docSnapshot.exists) {
-        log('barber not found');
         return false;
       }
 
@@ -47,7 +45,6 @@ class UpdateUserProfileUseCase {
       await userDocRef.update(updatedData);
       return true;
     } catch (e) {
-      log('message: Update profile error : $e');
       return false;
     }
   }

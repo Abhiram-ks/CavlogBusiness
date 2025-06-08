@@ -33,7 +33,7 @@ class _NotifcationScreenWidgetState extends State<NotifcationScreenWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: widget.screenWidth * 0.06),
+          padding: EdgeInsets.symmetric(horizontal:widget.screenWidth > 600 ? widget.screenWidth *.15 : widget.screenWidth * 0.06),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -47,12 +47,12 @@ class _NotifcationScreenWidgetState extends State<NotifcationScreenWidget> {
           ),
         ),
         BookingCountWidget(
-          screenWidth: widget.screenHeight,
+          screenWidth: widget.screenWidth,
           screenHeight: widget.screenHeight,
         ),
         Expanded(
             child: notificationWidgetBuilder(
-                context, widget.screenHeight, widget.screenHeight)),
+                context, widget.screenHeight, widget.screenWidth)),
       ],
     );
   }

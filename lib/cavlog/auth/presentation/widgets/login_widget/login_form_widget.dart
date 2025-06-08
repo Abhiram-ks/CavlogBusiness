@@ -71,7 +71,7 @@ class _LoginFormState extends State<LoginForm> {
             create: (context) => LoginBloc(AuthRepositoryImpl()),
             child: BlocListener<LoginBloc, LoginState>(
               listener: (context, state) {
-                handleLoginState(context, state);
+                handleLoginState(context, state, emailController,passwordController);
               },
               child: Builder(
                 builder: (context) {
@@ -92,9 +92,8 @@ class _LoginFormState extends State<LoginForm> {
                         CustomeSnackBar.show(
                           context: context,
                           title: 'Submission Faild',
-                          description:
-                              'Please fill in all the required fields before proceeding..',
-                          titleClr: AppPalette.redClr,
+                          description:'Please fill in all the required fields before proceeding..',
+                          titleClr: AppPalette.blackClr,
                         );
                       }
                     },

@@ -1,22 +1,22 @@
-import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-
+import 'package:flutter/foundation.dart';
 import '../../../../../../core/cloudinary/cloudinary_service.dart';
 import '../../../../data/datasources/firebase_chat_datasource.dart';
 import '../../../../data/models/chat_model.dart';
-
+import '../../../../domain/usecases/imageuploadon_cloud_usecase.dart';
 part 'send_message_event.dart';
 part 'send_message_state.dart';
 
 class SendMessageBloc extends Bloc<SendMessageEvent, SendMessageState> {
   final ChatRemoteDatasources chatRemoteDatasources;
   final CloudinaryService cloudinaryService;
+  final ImageUploader repo;
 
   SendMessageBloc({
     required this.chatRemoteDatasources,
     required this.cloudinaryService,
+    required this.repo,
   }) : super(SendMessageInitial()) {
     on<SendTextMessage>(_onSendTextMessage);
     on<SendImageMessage>(_onSendImageMessage);
@@ -52,9 +52,16 @@ class SendMessageBloc extends Bloc<SendMessageEvent, SendMessageState> {
     emit(SendMessageLoading());
 
     try {
-      final uploadedImageUrl = await cloudinaryService.uploadImage(File(event.image));
+      
+        String? response;
+       if (kIsWeb && event.imageBytes != null) {
+          response = await cloudinaryService.uploadWebImage(event.imageBytes!);
+       } else {
+         response  = await repo.upload(event.image);
+       } 
+      
 
-      if (uploadedImageUrl == null) {
+      if (response == null) {
         emit(SendMessageFailure());
         return;
       }
@@ -65,7 +72,7 @@ class SendMessageBloc extends Bloc<SendMessageEvent, SendMessageState> {
         senderId: event.barberId,
         barberId: event.barberId,
         userId: event.userId,
-        message: uploadedImageUrl,
+        message: response,
         createdAt: now,
         updateAt: now,
         isSee: false,

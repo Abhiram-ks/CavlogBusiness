@@ -8,6 +8,8 @@ abstract class RegisterSubmitionState  extends Equatable{
 final class RegisterSubmitionInitial extends RegisterSubmitionState {}
 
 
+final class RegisterLoading extends RegisterSubmitionState {}
+
 class RegisterSuccess  extends RegisterSubmitionState {}
 
 class RegisterFailure extends RegisterSubmitionState {
@@ -41,3 +43,5 @@ class OtpIncorrect extends RegisterSubmitionState{
   @override
    List<Object?> get props => [error];
 }
+
+

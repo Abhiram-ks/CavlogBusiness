@@ -1,4 +1,6 @@
 
+import 'package:barber_pannel/cavlog/app/domain/usecases/data_listing_usecase.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -31,7 +33,7 @@ class IndivitualBookingListWidget extends StatelessWidget {
       },
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
+        padding: EdgeInsets.symmetric(horizontal:screenWidth > 600 ? screenWidth *.15 : screenWidth * 0.04),
         child: Column(
           children: [
             BlocBuilder<FetchBookingUserBloc, FetchBookingUserState>(
@@ -76,11 +78,13 @@ class IndivitualBookingListWidget extends StatelessWidget {
                               assetPath: LottieImages.emptyData,
                               width: screenWidth * .6,
                               height: screenHeight * 0.35),
+                          Text("No records available at this time."),
                           Text("No activity found — time to take action!",
                               style: TextStyle(color: AppPalette.blackClr))
                         ]),
                   );
-                } else if (state is FetchBookingUserLoaded) {
+                } 
+                else if (state is FetchBookingUserLoaded) {
                   return ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -90,8 +94,9 @@ class IndivitualBookingListWidget extends StatelessWidget {
                         ConstantWidgets.hight10(context),
                     itemBuilder: (context, index) {
                       final booking = state.combo[index];
-                      final isOnline =
-                          booking.status.toLowerCase().contains('credit');
+                      final isOnline =booking.status.toLowerCase().contains('credit');
+                      final DateTime converter = convertToDateTime(booking.slotDate);
+                      final String date = formatDate(converter);
                       final double totalServiceAmount = booking
                           .serviceType.values
                           .fold(0.0, (sum, value) => sum + value);
@@ -114,7 +119,7 @@ class IndivitualBookingListWidget extends StatelessWidget {
                             'cancelled' => AppPalette.redClr,
                             _ => AppPalette.hintClr,
                           },
-                          dateTime: booking.slotDate,
+                          dateTime: date,
                           description: isOnline
                               ? 'Sent ₹${totalServiceAmount.toStringAsFixed(2)} via ${booking.paymentMethod}'
                               : 'Received ₹${totalServiceAmount.toStringAsFixed(2)} via ${booking.paymentMethod}',
@@ -139,33 +144,21 @@ class IndivitualBookingListWidget extends StatelessWidget {
                   );
                 }
 
-                return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.swap_horiz),
-                      Text(
-                          "Oops! Something went wrong. We're having trouble processing your request. Please try again."),
-                      InkWell(
-                          onTap: () async {
-                            context
-                                .read<FetchBookingUserBloc>()
-                                .add(FetchBookingUserRequest(userId: userId));
-                          },
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.refresh,
-                                color: AppPalette.blueClr,
-                              ),
-                              ConstantWidgets.width20(context),
-                              Text("Refresh",
-                                  style: TextStyle(
-                                      color: AppPalette.blueClr,
-                                      fontWeight: FontWeight.bold)),
-                            ],
-                          ))
-                    ]);
+                return Center(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(CupertinoIcons.cloud_download_fill),
+                        Text(
+                            "Oops! Something went wrong. We're having trouble processing your request. Please try again."),
+                            IconButton(onPressed: (){
+                              context
+                                  .read<FetchBookingUserBloc>()
+                                  .add(FetchBookingUserRequest(userId: userId));
+                            },icon:  Icon( CupertinoIcons.refresh))
+                      ]),
+                );
               },
             ),
             ConstantWidgets.hight20(context)

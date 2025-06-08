@@ -3,7 +3,6 @@ import 'package:barber_pannel/cavlog/app/data/repositories/fetch_barberdata_repo
 import 'package:barber_pannel/cavlog/app/data/models/barber_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 part 'fetch_barber_event.dart';
 part 'fetch_barber_state.dart';
 

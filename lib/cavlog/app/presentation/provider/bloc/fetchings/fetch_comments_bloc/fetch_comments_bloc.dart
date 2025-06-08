@@ -3,7 +3,6 @@ import 'package:barber_pannel/cavlog/app/data/repositories/fetch_comment_repo.da
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 part 'fetch_comments_event.dart';
 part 'fetch_comments_state.dart';
 

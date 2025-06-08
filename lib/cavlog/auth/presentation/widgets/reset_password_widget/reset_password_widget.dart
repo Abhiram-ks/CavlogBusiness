@@ -36,7 +36,7 @@ class _ResetPasswordWIdgetState extends State<ResetPasswordWIdget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: widget.screenWidth * 0.08,
+        horizontal:widget.screenWidth > 600 ? widget.screenWidth *.3 :  widget.screenWidth * 0.08,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

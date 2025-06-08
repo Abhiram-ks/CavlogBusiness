@@ -1,9 +1,14 @@
+import 'dart:io' as io; 
+// ignore: unused_import
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
+import 'package:universal_html/html.dart' as html;
 
 class PdfMakerWidget {
   static Future<bool> generateDetails({
@@ -105,9 +110,7 @@ class PdfMakerWidget {
                     ),
                 ],
               ),
-
               pw.SizedBox(height: 30),
-
               pw.Text(
                 'Team Cavlog',
                 style: pw.TextStyle(
@@ -121,7 +124,6 @@ class PdfMakerWidget {
                 style: pw.TextStyle(fontStyle: pw.FontStyle.italic),
               ),
               pw.SizedBox(height: 30),
-
               pw.Text(
                 'Have Questions?',
                 style: pw.TextStyle(
@@ -153,12 +155,26 @@ class PdfMakerWidget {
     );
 
     try {
-      final output = await getTemporaryDirectory();
-      final file = File("${output.path}/cavlog_details.pdf");
-      await file.writeAsBytes(await pdf.save());
-      await OpenFile.open(file.path);
-      return true;
+      final bytes = await pdf.save();
+
+      if (kIsWeb) {
+        final blob = html.Blob([bytes]);
+        final url = html.Url.createObjectUrlFromBlob(blob);
+        // ignore: unused_local_variable
+        final anchor = html.AnchorElement(href: url)
+          ..setAttribute("download", "cavlog_details.pdf")
+          ..click();
+        html.Url.revokeObjectUrl(url);
+        return true;
+      } else {
+        final output = await getTemporaryDirectory();
+        final file = io.File("${output.path}/cavlog_details.pdf");
+        await file.writeAsBytes(bytes);
+        await OpenFile.open(file.path);
+        return true;
+      }
     } catch (e) {
+      debugPrint("PDF generation error: $e");
       return false;
     }
   }

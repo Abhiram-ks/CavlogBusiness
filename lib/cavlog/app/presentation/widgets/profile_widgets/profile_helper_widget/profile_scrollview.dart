@@ -1,5 +1,6 @@
 
 import 'package:barber_pannel/cavlog/app/data/repositories/post_uploading_repo.dart';
+import 'package:barber_pannel/cavlog/app/domain/usecases/imageuploadon_cloud_usecase.dart';
 import 'package:barber_pannel/cavlog/app/domain/usecases/upload_post_usecase.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/profile_widgets/profile_helper_widget/profile_tabbar_widget.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/profile_widgets/tabbar_profile/posts.dart';
@@ -38,9 +39,8 @@ class ProfileScrollView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-       //.BlocProvider(create: (_) => FetchPostsBloc(FetchBarberPostRepositoryImpl())..add(FetchPostRequest())),
         BlocProvider(create: (_) => ProfiletabCubit()),
-        BlocProvider(create: (_) => UploadPostBloc(CloudinaryService(),UploadPostUsecase(PostUploadingRepo()))), 
+        BlocProvider(create: (_) => UploadPostBloc(CloudinaryService(),UploadPostUsecase(PostUploadingRepo()), ImageUploaderMobile(CloudinaryService()))), 
         BlocProvider(create: (_) => ImagePickerBloc(PickImageUseCase(ImagePickerRepositoryImpl(ImagePicker())))),
       ],
       child: Builder(builder: (context) {

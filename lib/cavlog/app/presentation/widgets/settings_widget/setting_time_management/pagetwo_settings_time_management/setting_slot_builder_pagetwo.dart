@@ -1,4 +1,5 @@
 
+import 'package:barber_pannel/cavlog/app/presentation/provider/cubit/booking_generate_cubit/calender_picker/calender_picker_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,26 +16,36 @@ BlocBuilder<FetchSlotsSpecificdateBloc, FetchSlotsSpecificDateState> blocBuilder
     return BlocBuilder<FetchSlotsSpecificdateBloc, FetchSlotsSpecificDateState>(
         builder: (context, state) {
           if (state is FetchSlotsSpecificDateEmpty) {
-            Column(
+               return Center(
+         child:  Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon( Icons.timer_off, color: AppPalette.buttonClr),
-                Text( '${state.salectedDate.day}/${state.salectedDate.month}/${state.salectedDate.year}'),
+                Icon( CupertinoIcons.cloud_download_fill),
+                 Text( '${state.salectedDate.day}/${state.salectedDate.month}/${state.salectedDate.year}'),
                 Text('No slots are available at the moment'),
               ],
-            );
-          } else if (state is FetchSlotsSpecificDateFailure) {
-            return Column(
+            ),
+     );
+          } 
+          else if (state is FetchSlotsSpecificDateFailure) {
+                return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.timer_off, color: AppPalette.redClr),
-                Text('Unexpected error occurred'),
-                Text('${state.errorMessage}. Please try again!'),
+                Icon(CupertinoIcons.calendar_badge_minus),
+                Text( "Oops! Something went wrong.",),
+                Text(  "Unable to complete the request. Please try again.",),
+                  
+                IconButton(onPressed: (){
+                 final selectedDate = context.read<CalenderPickerCubit>().state.selectedDate;
+                  context.read<FetchSlotsSpecificdateBloc>().add( FetchSlotsSpecificdateRequst(selectedDate));
+                }, icon:   Icon(CupertinoIcons.refresh,color: AppPalette.orengeClr,))
+              
               ],
             );
-          } else if (state is FetchSlotsSpecificDateLoading) {
+          } 
+          else if (state is FetchSlotsSpecificDateLoading) {
             return Shimmer.fromColors(
               baseColor: Colors.grey[300] ?? AppPalette.greyClr,
               highlightColor: AppPalette.whiteClr,
@@ -159,15 +170,18 @@ BlocBuilder<FetchSlotsSpecificdateBloc, FetchSlotsSpecificDateState> blocBuilder
               ],
             );
           }
-          return Column(
+            return Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(Icons.search, color: AppPalette.buttonClr),
-              Text('Searching ...'),
-              Text('Oops! Something went wrong. Try different date.')
+              Icon(CupertinoIcons.cloud_download_fill),
+              Text("Oop's Unable to complete the request."),
+              Text('Please try again later.'),
             ],
-          );
+          ),
+        );
+
         },
       );
   }

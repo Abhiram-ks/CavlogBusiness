@@ -19,10 +19,8 @@ class TabbarImageShow extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FetchPostsBloc, FetchPostsState>(
       builder: (context, state) {
-        if (state is FetchPostsLoadingState || state is FetchPostFailureState) {
+        if (state is FetchPostsLoadingState) {
           return loadingImage();
-        } else if (state is FetchPostFailureState) {
-          return Center(child: Text(state.errorMessage));
         } else if (state is FetchPostsEmptyState) {
           return Center(
               child: Column(
@@ -37,12 +35,13 @@ class TabbarImageShow extends StatelessWidget {
               Text('No posts yet'),
             ],
           ));
-        } else if (state is FetchPostSuccessState) {
+         } 
+        else if (state is FetchPostSuccessState) {
           return GridView.builder(
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount:MediaQuery.of(context).size.width > 600 ? 6 : 3,
               crossAxisSpacing: 2,
               mainAxisSpacing: 2,
               childAspectRatio: 1,
@@ -117,9 +116,21 @@ class TabbarImageShow extends StatelessWidget {
               );
             },
           );
-        } else {
-          return loadingImage();
-        }
+        } 
+        
+          return Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                CupertinoIcons.cloud_download_fill
+              ),
+                Text("Oop's Unable to complete the request."),
+              Text('Please try again later.'),
+            ],
+          ));
+      
       },
     );
   }

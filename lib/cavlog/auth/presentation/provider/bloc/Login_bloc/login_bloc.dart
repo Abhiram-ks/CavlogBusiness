@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:barber_pannel/cavlog/auth/data/repositories/auth_repository_impl.dart';
 import 'package:barber_pannel/core/refresh/refresh.dart';
@@ -23,20 +22,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               if (response) {
                 emit(LoginVarified());
               } else {
-                
-             log('Message user login failure due to "Authentication failed2"');
                 emit(LoginFiled(error: 'An Error Occurred: Database Error'));
               }
             } else {
               emit(LoginNotVerified());
             }
           } else {
-             log('Message user login failure due to "Authentication failed"');
             emit(LoginFiled(error: 'Authentication Failed'));
           }
         }
       } on FirebaseAuthException catch (e) {
-         log('Message user login failure due to $e');
         if (e.code == 'user-not-found' || e.code == 'wrong-password') {
           emit(LoginFiled(error: 'Incorrect Email or Password. Please try again'));
         } else if (e.code == 'too-many-requests') {
@@ -47,7 +42,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           emit(LoginFiled(error: 'An Error Occurred: ${e.message}'));
         }
       } catch (e) {
-        log('Message user login failure due to $e');
         emit(LoginFiled(error: 'An Error Occurred: ${e.toString()}'));
       }
     });

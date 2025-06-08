@@ -20,10 +20,10 @@ class WalletOverviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: screenWidth * 0.3,
+      height: screenHeight * 0.15,
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+        padding: EdgeInsets.symmetric(horizontal:screenWidth > 600 ? screenWidth *.15 : screenWidth * 0.05),
         child: Column(
           children: [
             ConstantWidgets.hight10(context),
@@ -36,7 +36,7 @@ class WalletOverviewCard extends StatelessWidget {
                     child: walletBalanceWidget(
                       iconColor: AppPalette.greyClr,
                       context: context,
-                      balance: '₹ 0.00',
+                      balance: 'Loading...',
                       balanceColor: AppPalette.greyClr,
                     ),
                   );

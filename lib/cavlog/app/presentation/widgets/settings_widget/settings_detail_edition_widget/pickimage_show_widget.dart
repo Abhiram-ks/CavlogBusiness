@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'package:barber_pannel/cavlog/app/presentation/widgets/service_widget/service_widget_upload_datas.dart';
 import 'package:barber_pannel/core/common/common_imageshow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,14 +59,7 @@ class ProfileEditDetailsWidget extends StatelessWidget {
                             size: 23.0,
                           );
                         } else if (state is ImagePickerSuccess) {
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Image.file(
-                              File(state.imagePath),
-                              width: 60, height: 60,
-                              fit: BoxFit.cover,
-                            ),
-                          );
+                           return buildImagePreview(state: state,screenWidth: 60,screenHeight: 60,radius: 12);
                         } else if (state is ImagePickerError) {
                           return Center(
                             child: Icon(

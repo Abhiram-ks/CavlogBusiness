@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:barber_pannel/cavlog/app/data/models/service_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,7 +17,7 @@ class ServiceRepositoryImpl implements FetchServiceRepository {
         return ServiceModel.fromMap(doc.id, doc.data());
       }).toList();
     }).handleError((e) {
-      log('Error fetching service data: $e');
+      
     });
   }
 }

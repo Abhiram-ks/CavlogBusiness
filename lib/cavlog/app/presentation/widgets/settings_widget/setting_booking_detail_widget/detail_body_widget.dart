@@ -1,6 +1,7 @@
 
 import 'package:barber_pannel/cavlog/app/presentation/widgets/settings_widget/setting_booking_detail_widget/detail_bottom_portion_widget.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/settings_widget/setting_booking_detail_widget/detail_topsection_userdata.dart';
+import 'package:barber_pannel/core/utils/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,15 +44,16 @@ class _BookingDetailBodyWidgetState extends State<BookingDetailBodyWidget> {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: ColoredBox(
-        color: AppPalette.orengeClr,
+        color: AppPalette.scafoldClr ?? AppPalette.whiteClr,
         child: SafeArea(
+          
             child: Column(
           children: [
             TopPortionWidget(
               screenHeight: widget.screenHeight,
               screenWidth: widget.screenWidth,
               userId: widget.userId,
-            ),
+            ),ConstantWidgets.hight20(context),
             BookingDetailsBottomDetails(screenHeight: widget.screenHeight, screenWidth:widget.screenWidth)
           ],
         )),

@@ -40,7 +40,7 @@ class _RevenueScreenBodyWidgetState extends State<RevenueScreenBodyWidget> {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: widget.screenWidth * .03),
+        padding: EdgeInsets.symmetric(horizontal:widget.screenWidth > 600 ? widget.screenWidth *0.15 : widget.screenWidth * .03),
         child: Column(
           children: [
             ConstantWidgets.hight10(context),

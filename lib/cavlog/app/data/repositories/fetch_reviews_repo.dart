@@ -59,7 +59,7 @@ Future<List<ReviewModel>>  buidReviewModels(List<Map<String, dynamic>> items) as
       );
       reviews.add(rviewModel);
     } catch (e) {
-      
+      return [];
     }
   }
   return reviews;

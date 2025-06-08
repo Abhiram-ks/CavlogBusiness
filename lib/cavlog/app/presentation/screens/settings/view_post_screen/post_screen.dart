@@ -1,5 +1,5 @@
 import 'package:barber_pannel/cavlog/app/data/repositories/fetch_post_with_barber_repo.dart';
-import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/bloc/fetch_post_with_barber_bloc.dart';
+import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetch_postwith_barber_bloc/fetch_post_with_barber_bloc.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/cubit/like_comment_cubit/like_comment_cubit.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/cubit/post_like_cubit/post_like_cubit.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/cubit/share_post_cubit/share_post_cubit.dart';

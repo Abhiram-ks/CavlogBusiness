@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
@@ -40,7 +39,6 @@ class SlotRepositoryImpl implements SlotRepository {
       final docSnapshot = await transaction.get(dateDocRef);
 
       if (docSnapshot.exists) {
-        log('Slot already exists for this date.');
         return false;
       }
 
@@ -71,7 +69,6 @@ class SlotRepositoryImpl implements SlotRepository {
       return true;
     });
   } catch (e) {
-    log('Error: $e');
     return false;
   }
 }

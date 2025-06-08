@@ -1,4 +1,5 @@
-import 'dart:developer';
+
+import 'package:barber_pannel/cavlog/auth/presentation/widgets/otp_widget/navigation_to_admin.dart';
 import 'package:barber_pannel/core/common/snackbar_helper.dart';
 import 'package:barber_pannel/core/themes/colors.dart';
 import 'package:barber_pannel/core/validation/input_validations.dart';
@@ -8,6 +9,7 @@ import 'package:barber_pannel/cavlog/auth/presentation/provider/cubit/buttonProg
 import 'package:barber_pannel/cavlog/auth/presentation/provider/cubit/timerCubit/timer_cubit_cubit.dart';
 import 'package:barber_pannel/cavlog/auth/presentation/widgets/otp_widget/otp_snackbar_message_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/common/common_action_button.dart';
 import '../../../../../core/common/textfield_helper.dart';
@@ -60,11 +62,13 @@ class _CredentialsFormFieldState extends State<CredentialsFormField> {
           ConstantWidgets.hight30(context),
           TermsAndConditionsWidget(),
           ConstantWidgets.hight10(context),
-          BlocListener<RegisterSubmitionBloc, RegisterSubmitionState>(listener: (context, state) {
+          BlocListener<RegisterSubmitionBloc, RegisterSubmitionState>(
+          listener: (context, state) {
             handleOtpState(context, state, true);
           },
-          child: ActionButton(screenWidth: widget.screenWidth,label: 'Send code', screenHight: widget.screenHight,
+          child: ActionButton(screenWidth: widget.screenWidth,label:kIsWeb ? 'Registger' : 'Send code', screenHight: widget.screenHight,
            onTap: () async{
+              
               if (!mounted) return;
               final timerCubit = context.read<TimerCubitCubit>();
               final registerBloc = context.read<RegisterSubmitionBloc>();
@@ -72,7 +76,7 @@ class _CredentialsFormFieldState extends State<CredentialsFormField> {
               final isChecked = context.read<CheckboxCubit>().state is CheckboxChecked;
               final navigator = Navigator.of(context);
               String? error = await ValidatorHelper.validateEmailWithFirebase(emailController.text);
-              log(error.toString());
+            
               
               if (!mounted) return;
               if (widget.formKey.currentState!.validate()) {
@@ -83,14 +87,18 @@ class _CredentialsFormFieldState extends State<CredentialsFormField> {
                      title: "Email alredy exitst",
                      description: 'Email already exists, please try another email.', titleClr: AppPalette.redClr,);
                      return;
+                  } else if (kIsWeb) {
+                    registerBloc.add(UpdateCredentials(email: emailController.text, isVerified: false, password: passwordController.text, isBloc: false));
+                    // ignore: use_build_context_synchronously
+                    context.read<RegisterSubmitionBloc>().add(SubmitRegistration());
+                    return;
                   }
                   buttonCubit.startLoading();
                   if (!mounted) return;
                   registerBloc.add(UpdateCredentials(email: emailController.text, isVerified: false, password: passwordController.text, isBloc: false));
                   registerBloc.add(GenerateOTPEvent());
-                  await Future.delayed(const Duration(seconds: 2));
                   timerCubit.startTimer();
-                   buttonCubit.stopLoading();
+                  buttonCubit.stopLoading();
                   if (mounted) {
                     navigator.pushNamed(AppRoutes.otp);
                    }

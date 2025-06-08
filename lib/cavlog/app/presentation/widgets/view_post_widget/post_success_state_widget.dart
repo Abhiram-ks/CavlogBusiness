@@ -1,7 +1,7 @@
 
 import 'package:barber_pannel/cavlog/app/data/models/post_with_barber.dart';
 import 'package:barber_pannel/cavlog/app/domain/usecases/data_listing_usecase.dart';
-import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/bloc/fetch_post_with_barber_bloc.dart';
+import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetch_postwith_barber_bloc/fetch_post_with_barber_bloc.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/cubit/post_like_cubit/post_like_cubit.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/cubit/share_post_cubit/share_post_cubit.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/view_post_widget/post_bottom_sheet.dart';

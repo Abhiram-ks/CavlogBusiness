@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
@@ -41,10 +41,9 @@ class EmailService {
     """;
     try {
       await send(message, smtpServer);
-      log('OTP sent successfully to: $recipientEmail');
       return true;
     } on MailerException catch (e) {
-      log('faild to send OTP : ${e.toString()}');
+       Exception('Sending OTP : $e');
       return false;
     }
   }

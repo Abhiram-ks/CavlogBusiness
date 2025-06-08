@@ -23,7 +23,7 @@ class WalletTransctionWidget extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+          padding: EdgeInsets.symmetric(horizontal:screenWidth > 600 ? screenWidth *.15 : screenWidth * 0.03),
           child: SizedBox(
             height: screenHeight * 0.04,
             child: Row(

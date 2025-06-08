@@ -1,13 +1,13 @@
 
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetch_booking_bloc/fetch_booking_bloc.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetchbarber/fetch_barber_bloc.dart';
+import 'package:barber_pannel/cavlog/app/presentation/widgets/home_widgets/home_screen_widget/home_custom_scrolable_view.dart';
 import 'package:barber_pannel/core/themes/colors.dart';
 import 'package:barber_pannel/core/utils/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/routes/routes.dart';
-import '../../../screens/pages/home/home_screen.dart';
 import '../../settings_widget/setting_booking_detail_widget/detail_customs_cards_widget.dart';
 
 class HomeScreenSliverAppBar extends StatelessWidget {
@@ -135,7 +135,7 @@ class HomeScreenSliverAppBar extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushNamed(context, AppRoutes.walletScreen);
                         },
-                      ),
+                      ),ConstantWidgets.width20(context),
                       IconButton.filled(
                         style: IconButton.styleFrom(
                           backgroundColor: AppPalette.whiteClr,

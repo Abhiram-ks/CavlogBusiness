@@ -1,6 +1,6 @@
+import 'package:barber_pannel/cavlog/app/data/models/barber_model.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetch_posts_bloc/fetch_posts_bloc.dart';
 import 'package:barber_pannel/cavlog/app/presentation/screens/settings/help_screen/help_screen.dart';
-import 'package:barber_pannel/core/common/common_loading_widget.dart';
 import 'package:barber_pannel/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,11 +40,6 @@ class ProfileScreen extends StatelessWidget {
                     resizeToAvoidBottomInset: true,
                     body: BlocBuilder<FetchBarberBloc, FetchBarberState>(
                       builder: (context, state) {
-                        if (state is FetchBarbeLoading ||
-                            state is FetchBarberError) {
-                          return LoadingScreen(
-                              screenHeight: screenHeight, screenWidth: screenWidth);
-                        }
                         if (state is FetchBarberLoaded) {
                           return ProfileScrollView(
                             screenHeight: screenHeight,
@@ -52,7 +47,11 @@ class ProfileScreen extends StatelessWidget {
                             barber: state.barber,
                           );
                         }
-                        return LoadingScreen(screenHeight: screenHeight, screenWidth: screenWidth);
+                        return  ProfileScrollView(
+                            screenHeight: screenHeight,
+                            screenWidth: screenWidth,
+                            barber: BarberModel(uid: '', barberName: "BarberName Loading...", ventureName: 'VentureName Loading...', phoneNumber: 'Loading...', address: 'Address Loading...', email: 'example@gamil.com', isVerified: true, isblok: false),
+                          );
                       },
                     ),
                     floatingActionButton: FloatingActionButton(

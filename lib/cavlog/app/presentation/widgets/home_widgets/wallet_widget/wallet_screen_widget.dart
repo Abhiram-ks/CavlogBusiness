@@ -39,7 +39,7 @@ class _WalletScreenWidgetState extends State<WalletScreenWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: widget.screenWidth * 0.06),
+          padding: EdgeInsets.symmetric(horizontal:widget.screenWidth > 600 ? widget.screenWidth*.15 : widget.screenWidth * 0.06),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

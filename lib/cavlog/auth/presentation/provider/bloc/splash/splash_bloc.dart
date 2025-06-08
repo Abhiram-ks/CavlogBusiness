@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:barber_pannel/cavlog/app/data/models/barber_model.dart';
 import 'package:bloc/bloc.dart';
@@ -30,7 +29,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
      final SharedPreferences prefs = await SharedPreferences.getInstance();
      final bool? isLoggedIn = prefs.getBool('isLoggedIn');
      final String? barberUid = prefs.getString('barberUid');
-     log('Error Splash screen due to: $isLoggedIn $barberUid');
 
      if (isLoggedIn == true && barberUid != null && barberUid.isNotEmpty) {
        DocumentSnapshot barberDoc = await _firestore.collection('barbers').doc(barberUid).get();
@@ -40,7 +38,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
          if (!barberModel.isblok) {
            emit(GoToHomePage(barberModel));
          }else {
-          log('Barber account is blocked');
           emit(GoToLoginPage());
          }
        }else {
@@ -50,7 +47,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       emit(GoToLoginPage());
      }
    } catch (e) {
-    log('Error in splash screen ; $e');
      emit(GoToLoginPage());
    } finally {
     emit (SplashAnimationCompleted());

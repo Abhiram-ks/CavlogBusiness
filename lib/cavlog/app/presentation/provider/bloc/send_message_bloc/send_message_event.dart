@@ -17,10 +17,12 @@ final class SendTextMessage extends SendMessageEvent {
 final class SendImageMessage extends SendMessageEvent {
   final String image;
   final String userId;
+  final Uint8List? imageBytes;
   final String barberId;
 
   SendImageMessage({
     required this.image,
+    this.imageBytes,
     required this.userId,
     required this.barberId,
   });

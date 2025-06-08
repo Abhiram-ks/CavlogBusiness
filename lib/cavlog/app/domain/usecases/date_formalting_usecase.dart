@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../presentation/provider/cubit/revenue_dashbord_cubit/revenue_dashbord_cubit.dart';
 
 class RevenueDateCalculater {
-  /// Returns a date range for the specified filter period
   static DateTimeRange getDateRange(RevenueFilter filter) {
     final now = DateTime.now();
 
@@ -55,7 +54,7 @@ class RevenueDateCalculater {
 
       case RevenueFilter.yearly:
         final start = DateTime(now.year - 1, 1, 1);
-        final end = DateTime(now.year, 1, 1); // Jan 1 of current year
+        final end = DateTime(now.year, 1, 1);
         return DateTimeRange(start: start, end: end);
     }
   }

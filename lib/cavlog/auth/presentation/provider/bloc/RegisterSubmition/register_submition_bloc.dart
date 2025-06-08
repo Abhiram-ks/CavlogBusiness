@@ -1,4 +1,5 @@
-import 'dart:developer';import 'package:barber_pannel/cavlog/auth/domain/repositories/otpSend/generate_otp_source.dart';
+
+import 'package:barber_pannel/cavlog/auth/domain/repositories/otpSend/generate_otp_source.dart';
 import 'package:barber_pannel/cavlog/auth/domain/repositories/otpVarification/otp_varification.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -43,13 +44,11 @@ class RegisterSubmitionBloc extends Bloc<RegisterSubmitionEvent, RegisterSubmiti
       _password = event.password;
       _isVerified = event.isVerified;
       _isBlok = event.isBloc;
-     log('Working well $_email $_password');
     });
     
     on<GenerateOTPEvent>((event, emit)async {
       if (_email.isEmpty) {
         emit(RegisterSubmitionInitial());
-         await Future.delayed(Duration(milliseconds: 30));
         emit(OtpFailure(error: 'Email is Required to generate OTP'));
         return;
       }
@@ -62,7 +61,6 @@ class RegisterSubmitionBloc extends Bloc<RegisterSubmitionEvent, RegisterSubmiti
 
          if (otpSend != null) {
          emit(OtpSuccess());
-         log('OTP sent successfully to $_email');
          await Future.delayed(Duration(seconds: 120));
          if (_otp != null) {
             emit(OtpExpired());
@@ -78,14 +76,12 @@ class RegisterSubmitionBloc extends Bloc<RegisterSubmitionEvent, RegisterSubmiti
 
     on<VerifyOTPEvent>((event, emit)async {
       if (_otp == null) {
-        log('OTP Expired - Emitting OtpExpired State');
         emit(OtpExpired());
         return;
       }
 
      if (_otpGeneratedTime != null && DateTime.now().difference(_otpGeneratedTime!) > Duration(seconds: 120)) {
         _otp = null;
-         log('OTP Expired - Emitting OtpExpired State111');
         emit(OtpExpired());
         return;
       }
@@ -95,16 +91,13 @@ class RegisterSubmitionBloc extends Bloc<RegisterSubmitionEvent, RegisterSubmiti
        bool response = await otpVarification.verifyOTP(inputOtp: event.inputOtp.trim(),otp: _otp);
 
        if (response) {
-        //  await Future.delayed(Duration(milliseconds: 50)); 
         emit(OtpVarifyed());
        }else{
          emit(OtpLoading()); 
          await Future.delayed(Duration(milliseconds: 50)); 
-        log('OTP Incorrect - Emitting OtpIncorrect State');
         emit(OtpIncorrect(error: 'OTP Invalid'));
        }
       } catch (e) {
-        log('OTP varification failed: $e');
          emit(OtpIncorrect(error: e.toString()));
       }
     });
@@ -112,9 +105,9 @@ class RegisterSubmitionBloc extends Bloc<RegisterSubmitionEvent, RegisterSubmiti
 
 
      on<SubmitRegistration>((event, emit) async{
+      emit(RegisterLoading());
       try {
         bool response = await AuthRemoteDataSource().signUpBarber(barberName: _fullName, ventureName: _ventureName, phoneNumber: _phoneNumber, address: _address, email: _email, password: _password, isVerified: _isVerified, isblok: _isBlok);
-        log('Working well $_fullName  $_email');
         if (response) {
           emit(RegisterSuccess());
         }else {
@@ -124,6 +117,8 @@ class RegisterSubmitionBloc extends Bloc<RegisterSubmitionEvent, RegisterSubmiti
         emit(RegisterFailure(error: e.toString()));
       }
     });
+
+
   }
 }
 

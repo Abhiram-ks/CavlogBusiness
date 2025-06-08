@@ -30,7 +30,7 @@ class ActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: screenHight * 0.06 ,
-      width: screenWidth,
+      width:screenWidth > 600 ? screenWidth*.20 : screenWidth,
       child: Material(
         color:color ?? AppPalette.buttonClr,
         borderRadius: BorderRadius.circular(10),

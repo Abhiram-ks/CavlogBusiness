@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -12,7 +11,6 @@ class FirestoreImageService {
       });
       return true;
     } catch (e) {
-      log('message: Error updating image URL: $e');
       return false;
     }
   }

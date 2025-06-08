@@ -1,7 +1,9 @@
 
+import 'package:barber_pannel/cavlog/app/domain/usecases/data_listing_usecase.dart';
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetch_booking_bloc/fetch_booking_bloc.dart';
 import 'package:barber_pannel/cavlog/app/presentation/screens/settings/bookings_screen/booking_details_screen.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/home_widgets/wallet_widget/wallet_tranasction_card_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -49,8 +51,7 @@ RefreshIndicator walletTransactionWidgetBuilder(
                             stusColor: AppPalette.greyClr,
                             dateTime: DateTime.now().toString(),
                             method: 'Online Banking',
-                            description:
-                                "Sent: Online Banking transfer of ₹500.00",
+                            description:"Sent: Online Banking transfer of ₹500.00",
                           );
                         },
                       ),
@@ -62,23 +63,22 @@ RefreshIndicator walletTransactionWidgetBuilder(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.account_balance_wallet_rounded),
-                        Text(
-                            "Currently, there are no transaction history available."),
-                        Text("No transactions yet!",
-                            style: TextStyle(color: AppPalette.orengeClr))
+                        Text("Currently, there are no transaction history available."),
+                        Text("No transactions yet!", style: TextStyle(color: AppPalette.orengeClr))
                       ]);
-                } else if (state is FetchBookingSuccess) {
+                }
+                else if (state is FetchBookingSuccess) {
                   return ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.zero,
                     itemCount: state.bookings.length,
-                    separatorBuilder: (_, __) =>
-                        ConstantWidgets.hight10(context),
+                    separatorBuilder: (_, __) => ConstantWidgets.hight10(context),
                     itemBuilder: (context, index) {
                       final booking = state.bookings[index];
-                      final iscredited =
-                          booking.transaction.toLowerCase().contains('debited');
+                      final iscredited =booking.transaction.toLowerCase().contains('debited');
+                      final String date = formatDate(booking.createdAt);
+                      final String time = formatTimeRange(booking.createdAt);
                       final isOnline = booking.paymentMethod
                           .toLowerCase()
                           .contains('online banking');
@@ -94,7 +94,7 @@ RefreshIndicator walletTransactionWidgetBuilder(
                         amountColor: iscredited
                             ? AppPalette.greenClr
                             : AppPalette.redClr,
-                        dateTime: DateFormat('dd/MM/yyyy').format(booking.createdAt),
+                        dateTime:'$date At $time',
                         description:
                             '${iscredited ? 'Recived' : 'Refunded'}: ${booking.paymentMethod} transfer of ₹${booking.amountPaid.toStringAsFixed(2)}',
                         id: isOnline
@@ -116,7 +116,7 @@ RefreshIndicator walletTransactionWidgetBuilder(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.swap_horiz),
+                      Icon(CupertinoIcons.cloud_download_fill),
                       Text(
                           "Oops! Something went wrong. We're having trouble processing your request. Please try again."),
                       InkWell(

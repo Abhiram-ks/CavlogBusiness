@@ -17,10 +17,10 @@ class BookingCountWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: screenWidth * 0.15,
+      height: screenHeight * 0.15,
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+        padding: EdgeInsets.symmetric(horizontal:screenWidth > 600 ? screenWidth *.15  : screenWidth * 0.05),
         child: Column(
           children: [
             ConstantWidgets.hight10(context),

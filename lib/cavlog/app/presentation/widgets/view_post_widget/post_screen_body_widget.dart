@@ -1,5 +1,5 @@
 import 'package:barber_pannel/cavlog/app/data/models/post_with_barber.dart' show PostWithBarberModel;
-import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/bloc/fetch_post_with_barber_bloc.dart';
+import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/fetchings/fetch_postwith_barber_bloc/fetch_post_with_barber_bloc.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/view_post_widget/post_card_widget.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/view_post_widget/post_success_state_widget.dart';
 import 'package:barber_pannel/core/themes/colors.dart';

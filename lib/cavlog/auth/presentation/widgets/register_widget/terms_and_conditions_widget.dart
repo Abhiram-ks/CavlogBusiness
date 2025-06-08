@@ -1,3 +1,4 @@
+import 'package:barber_pannel/cavlog/app/presentation/widgets/profile_widgets/tabbar_profile/settings.dart';
 import 'package:barber_pannel/core/themes/colors.dart';
 import 'package:barber_pannel/cavlog/auth/presentation/provider/cubit/Checkbox/checkbox_cubit.dart';
 import 'package:flutter/gestures.dart';
@@ -44,8 +45,8 @@ class TermsAndConditionsWidget extends StatelessWidget {
                         color: AppPalette.blueClr,
                         fontWeight: FontWeight.bold,
                       ),
-                      recognizer: TapGestureRecognizer()..onTap = () {
-    
+                       recognizer: TapGestureRecognizer()..onTap = () {
+                         termsAndConditionsUrl();
                       },
                     ),
                   ],

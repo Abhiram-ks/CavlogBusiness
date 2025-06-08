@@ -34,8 +34,7 @@ void showReviewDetisSheet(BuildContext context, double screenHeight,
                   horizontal: screenWidth * .03, ),
               child: BlocBuilder<FetchReviewsBloc, FetchReviewsState>(
                 builder: (context, state) {
-                  if (state is FetchReviewsLoadingState ||
-                      state is FetchReviewFailureState) {
+                  if (state is FetchReviewsLoadingState) {
                     return reviewsShimerBuilder();
                   } else if (state is FetchReviewsEmptyState) {
                     return Center(
@@ -56,7 +55,8 @@ void showReviewDetisSheet(BuildContext context, double screenHeight,
                         ],
                       ),
                     );
-                  } else if (state is FetchReviewsSuccesState) {
+                   }
+                  else if (state is FetchReviewsSuccesState) {
                     final reviews = state.reviews;
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +100,20 @@ void showReviewDetisSheet(BuildContext context, double screenHeight,
                       ],
                     );
                   }
-                  return reviewsShimerBuilder();
+                         return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(CupertinoIcons.cloud_download_fill),
+              Text("Oop's Unable to complete the request."),
+              Text('Please try again later.'),
+              IconButton(onPressed: (){
+                context.read<FetchReviewsBloc>().add(FetchReviewRequest());
+              }, icon:Icon(CupertinoIcons.refresh) )
+            ],
+          ),
+        );
                 },
               ),
             ),

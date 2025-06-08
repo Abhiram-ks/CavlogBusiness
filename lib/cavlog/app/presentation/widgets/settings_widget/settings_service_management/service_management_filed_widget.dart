@@ -74,8 +74,8 @@ class _ServiceManagementFiledState extends State<ServiceManagementFiled> {
         ),
         ConstantWidgets.width10(context),
         Container(
-          height: widget.screenWidth * 0.12,
-          width: widget.screenWidth * 0.12,
+          height:50,
+          width:50,
           decoration: BoxDecoration(
             color: widget.firstIconBgColor ?? AppPalette.greyClr,
             borderRadius: BorderRadius.circular(14),
@@ -101,8 +101,8 @@ class _ServiceManagementFiledState extends State<ServiceManagementFiled> {
         ),
         ConstantWidgets.width10(context),
         Container(
-          height: widget.screenWidth * 0.12,
-          width: widget.screenWidth * 0.12,
+          height:50,
+          width:50,
           decoration: BoxDecoration(
             color:widget.secoundIconBgColor ?? AppPalette.redClr,
             borderRadius: BorderRadius.circular(14),

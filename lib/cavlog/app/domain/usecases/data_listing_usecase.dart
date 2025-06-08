@@ -7,9 +7,14 @@ String formatTimeRange(DateTime startTime) {
 }
 
 String formatDate(DateTime dateTime) {
-  final dateFormat = DateFormat('dd-MMM-yyyy');
+  final dateFormat = DateFormat('dd MMM yyyy');
   return dateFormat.format(dateTime);
 }
+DateTime convertToDateTime(String dateString) {
+  final DateFormat formatter = DateFormat('dd-MM-yyyy');
+  return formatter.parse(dateString);
+}
+
 
 double getTotalServiceAmount(List<Map<String, dynamic>> services) {
   return services.fold(

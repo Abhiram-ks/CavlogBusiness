@@ -2,9 +2,7 @@ import 'package:barber_pannel/cavlog/app/data/models/wallet_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../../data/repositories/fetch_barber_wallet_repo.dart';
-
 part 'fetch_wallet_event.dart';
 part 'fetch_wallet_state.dart';
 

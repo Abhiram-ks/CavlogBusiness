@@ -57,13 +57,12 @@ class FetchBookingUserBloc extends Bloc<FetchBookingUserEvent, FetchBookingUserS
         return;
       }
       await emit.forEach<List<BookingModel>>(
-        _repository.streamBookings(userId: event.userId,barberId: barberUid),
+        _repository.streamBookingsFilter(userId: event.userId,barberId: barberUid,status: event.filter),
         onData: (booking) {
-          final filteredBooking = booking.where((booking) => booking.serviceStatus.toLowerCase().contains(event.filter.toLowerCase())).toList();
-          if (filteredBooking.isEmpty) {
+          if (booking.isEmpty) {
             return FetchBookingUserEmptys();
           } else {
-            return FetchBookingUserLoaded(combo: filteredBooking);
+            return FetchBookingUserLoaded(combo: booking);
           }
         },
         onError: (error, stackTrace) {

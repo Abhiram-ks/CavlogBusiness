@@ -1,8 +1,9 @@
-import 'dart:io';
+
+import 'package:barber_pannel/cavlog/app/presentation/widgets/service_widget/service_widget_upload_datas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/themes/colors.dart';
-import '../../provider/bloc/image_picker/image_picker_bloc.dart';
+import '../../../../../../core/themes/colors.dart';
+import '../../../provider/bloc/image_picker/image_picker_bloc.dart';
 
 BlocBuilder<ImagePickerBloc, ImagePickerState> imagePIckerChating() {
   return BlocBuilder<ImagePickerBloc, ImagePickerState>(
@@ -30,15 +31,7 @@ BlocBuilder<ImagePickerBloc, ImagePickerState> imagePIckerChating() {
             child: Stack(
               alignment: Alignment.centerLeft,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.file(
-                    File(state.imagePath),
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                 buildImagePreview(state: state,screenWidth:80,screenHeight: 80,radius: 12),
                 Positioned(
                   top: 4,
                   right: 4,

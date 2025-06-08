@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import '../../../../../data/repositories/fetch_barber_service_repo.dart';
@@ -44,7 +43,6 @@ class BarberServiceModeificationBloc extends Bloc<BarberServiceModeificationEven
      //--------------------------------------------------------\\
     //! Update Barber service event
     on<FetchBarberServiceUpdateRequestEvent>((event, emit) {
-      log('message: this is the barber id;');
       _barberUid = event.barberUid;
       _serviceKey = event.serviceKey;
       _serviceValue = event.serviceValue;

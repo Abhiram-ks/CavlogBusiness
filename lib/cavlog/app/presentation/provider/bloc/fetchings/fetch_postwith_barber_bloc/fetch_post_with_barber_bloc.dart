@@ -2,7 +2,6 @@ import 'package:barber_pannel/cavlog/app/data/repositories/fetch_post_with_barbe
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../../data/models/post_with_barber.dart';
 part 'fetch_post_with_barber_event.dart';
 part 'fetch_post_with_barber_state.dart';

@@ -1,4 +1,5 @@
 
+import 'package:barber_pannel/cavlog/app/domain/usecases/data_listing_usecase.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/home_widgets/wallet_widget/wallet_tranasction_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,7 @@ RefreshIndicator notificationWidgetBuilder(
     child: SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+        padding: EdgeInsets.symmetric(horizontal:screenWidth > 600 ? screenWidth*.15 : screenWidth * 0.02),
         child: Column(
           children: [
             BlocBuilder<FetchBookingWithBarberBloc, FetchBookingWithUserStateBase>(
@@ -75,6 +76,8 @@ RefreshIndicator notificationWidgetBuilder(
                       final booking = state.combo[index];
                       final isUser =   booking.user.userName!.isNotEmpty && booking.user.userName != 'null';
                       final isAddress = booking.user.address!.isNotEmpty && booking.user.address != 'null';
+                      final DateTime converter = convertToDateTime(booking.booking.slotDate);
+                      final String date = formatDate(converter);
 
                       return TrasactionCardsWalletWidget(
                         ontap: () {
@@ -86,7 +89,7 @@ RefreshIndicator notificationWidgetBuilder(
                         amountColor: isUser
                             ? AppPalette.blackClr
                             : AppPalette.redClr,
-                        dateTime: booking.booking.slotDate,
+                        dateTime:date,
                         description: '${isUser ? 'Booking Name' : 'Personal Details Hided'}: ${booking.user.userName}',
                         id: 'Method: ${booking.booking.paymentMethod}',
                         method: isAddress ? 'Address: ${booking.user.address}' : 'No address availble at the moment',

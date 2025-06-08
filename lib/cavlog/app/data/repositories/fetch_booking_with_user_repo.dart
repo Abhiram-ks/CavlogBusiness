@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:barber_pannel/cavlog/app/data/models/booking_model.dart';
 import 'package:barber_pannel/cavlog/app/data/models/booking_with_user_model.dart';
@@ -7,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class FetchBookingAndUserRepository {
   Stream<List<BookingWithUserModel>> streamBookingsWithUser({required String barberID});
+  Stream<List<BookingWithUserModel>> streamBookingFiltering({required String barberID, required String status});
 }
 
 class FetchBookingWithUserRepositoryImpl implements FetchBookingAndUserRepository {
@@ -20,6 +20,16 @@ class FetchBookingWithUserRepositoryImpl implements FetchBookingAndUserRepositor
     return _firestore
         .collection('bookings')
         .where('barberId', isEqualTo: barberID)
+        .snapshots()
+        .asyncMap((snapshot) => _userServices.attachUserToBookings(snapshot));
+  }
+  
+  @override
+    Stream<List<BookingWithUserModel>> streamBookingFiltering({required String barberID, required String status}) {
+    return _firestore
+        .collection('bookings')
+        .where('barberId', isEqualTo: barberID)
+        .where('service_status', isEqualTo: status)
         .snapshots()
         .asyncMap((snapshot) => _userServices.attachUserToBookings(snapshot));
   }
@@ -42,7 +52,6 @@ class UserServices {
         }
         return null;
       } catch (e) {
-        log('Error fetching user for booking ID ${doc.id}: $e');
         return null;
       }
     });

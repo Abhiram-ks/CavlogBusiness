@@ -1,7 +1,6 @@
 
 import 'package:barber_pannel/cavlog/app/presentation/provider/bloc/gemini_chat_bloc/gemini_chat_bloc.dart';
-import 'package:barber_pannel/cavlog/app/presentation/screens/pages/chat/indivitualchat_screen.dart';
-import 'package:barber_pannel/cavlog/app/presentation/widgets/chat_widgets/chat_window_textfiled.dart';
+import 'package:barber_pannel/cavlog/app/presentation/widgets/chat_widgets/chat_window_widget/chat_window_textfiled.dart';
 import 'package:barber_pannel/cavlog/app/presentation/widgets/settings_widget/setting_needhelp_widget.dart/help_promit_chatbuilder.dart';
 import 'package:barber_pannel/core/utils/constant/constant.dart';
 import 'package:flutter/material.dart';
